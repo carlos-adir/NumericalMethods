@@ -1,5 +1,6 @@
 '''
 		   @file: 1-linear.py
+		   @date: 16th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: This program calculates the curve length when the functions x(t), y(t), z(t)
 				  are given in a closed interval [a, b]. The program calculates using the
