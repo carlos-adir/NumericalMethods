@@ -1,5 +1,5 @@
 '''
-		   @file: 5-Secant_method.py
+		   @file: 6-False_position_method.py
    		   @date: 17th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: 
@@ -9,8 +9,7 @@
 import numpy as np
 import sympy
 import roots
-sqrt 	= sympy.sqrt 
-diff 	= sympy.diff
+sqrt 	= sympy.sqrt
 
 sympy.init_printing()
 
@@ -39,10 +38,12 @@ while 1:
 	n  += 1
 	if abs(p - p1) < tol or n == nmax:
 		break
-	p0	= p1
-	q0 	= q1
-	p1 	= p
-	q1 	= f(p)
+	q 	= f(p)
+	if q * q1 < 0:
+		p0 = p1
+		q0 = q1
+	p1 = p
+	q1 = q
 
 if n == nmax:
 	print "The process stoped by the number of iterations"

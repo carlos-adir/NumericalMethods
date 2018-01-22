@@ -1,1 +1,3 @@
-# Metodos-Numericos
+# Numeric Methods
+
+## Objective

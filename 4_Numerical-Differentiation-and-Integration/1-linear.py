@@ -3,9 +3,9 @@
 		   @date: 16th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: This program calculates the curve length when the functions x(t), y(t), z(t)
-				  are given in a closed interval [a, b]. The program calculates using the
-				  linear approximation: we break the curve in n points and we add up every
-				  distance between the connected points.
+				  are given with the variable t is inside a closed interval [a, b].
+				  The program calculates using the linear approximation:we break the curve
+				  in n points and we add up every distance between the connected points.
 
 				  For instance, we can calculate the curve length of (sin(t), cos(t), 0) when
 				  t is the between the values [0, pi].
