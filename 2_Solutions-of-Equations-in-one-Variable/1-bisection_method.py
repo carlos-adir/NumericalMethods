@@ -16,27 +16,30 @@ sympy.init_printing()
 
 
 # The variables
-x 		= sympy.symbols('x')
+t 		= sympy.symbols('t')
 
 # Initial conditions
-a, b    = 1.0, 2.0						# The interval
+a, b    = 1.0, 2.0						# The interval, it's suppose that a < b
 f       = x**3+4*x**2-10 				# The function
 tol     = 1e-5 							# The max error acceptable
 nmax    = 10 							# Max number iteractions  
 
-coefs 	= [1, 4, 0, -10] 				# To use in numpy
+coefs 	= [1, 4, 0, -10] 				# To use in numpy, because the function is
+										# 1*x**3+4*x**2+0*x**1+(-10)*x**0
+										# It is possible to improve it to find the coefficients by itself 
 
 # There at least one root in the interval [a, b]
+# And we show on the screen the root using the sympy algorithms
 roots.root(a, b, f)
 
 # The calculations
-f 		= sympy.lambdify(x, f, "numpy") # Transform the function to lambdify
-n 		= 0
-fa		= f(a)
-while n < nmax:
-	p 	= a + (b-a)/2
+f 		= sympy.lambdify(t, f, "numpy") # Transform the function to lambdify, now we can use like f(0)
+n 		= 0 							# Because we are in the frist interaction
+fa		= f(a)							# We calculate the first point, the left
+while n < nmax:							# To never be a infinite loop
+	p 	= a + (b-a)/2					# We calculate the midle coordinate
 	fp 	= f(p)
-	if fp == 0 or (b-a)/2 < tol:
+	if fp == 0 or (b-a)/2 < tol:		# Verifies if we found the root exaclty on p, or when the size of interval is too small
 		break
 	n  += 1
 	if fa*fp > 0:
