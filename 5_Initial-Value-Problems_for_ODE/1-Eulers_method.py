@@ -21,10 +21,10 @@ if __name__ == "__main__":
 	f 		= y - t**2 + 1	# The function f(t, y)
 	
 	# The begin to start the calculations
-	f 		= sp.lambdify((y, t), f, "numpy") 						# Transform the function to lambdify
-	h 		= (b-a)/n 												# The step size
-	t 		= a 													# The frist point that we start
-	w 		= [c]													# The y values approx
+	f 		= sp.lambdify((y, t), f, "numpy") 			# Transform the function to lambdify
+	h 		= (b-a)/n 									# The step size
+	t 		= a 										# The frist point that we start
+	w 		= [c]										# The y values approx
 
 	for i in range(n):
 		w.append(w[i] + f(w[i], t))
