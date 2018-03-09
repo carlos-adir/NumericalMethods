@@ -3,7 +3,7 @@
 		   @file: 1-Eulers_method.py
 		   @date: 28th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: This algorithm returns the final value
 
 '''
 
@@ -24,13 +24,13 @@ if __name__ == "__main__":
 	f 		= sp.lambdify((y, t), f, "numpy") 			# Transform the function to lambdify
 	h 		= (b-a)/n 									# The step size
 	t 		= a 										# The frist point that we start
-	w 		= [c]										# The y values approx
+	w 		= c											# The y values approx
 
 	for i in range(n):
-		w.append(w[i] + f(w[i], t))
+		w = w + f(w, t)
 		t 	= a + h*(i+1)
 
 	# The final result
-	print("The approximated value: y(" + str(b) + ") = " + str(w[n]))
+	print("The approximated value: y(" + str(b) + ") = " + str(w))
 
 	
