@@ -9,6 +9,7 @@
 
 import numpy as np
 import sympy as sp
+import inputs
 
 if __name__ == "__main__":
 	a, b, c, n, f = inputs.in1() # The principals inputs

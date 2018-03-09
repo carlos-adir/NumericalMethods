@@ -8,11 +8,14 @@
 
 '''
 
+import sympy as sp
+import numpy as np
+
 def in1():
 	# The variables
 	t		= sp.symbols('t')
 	y 		= sp.symbols('y')
-
+ 
 	# Initial conditions
 	a, b, c	= 0, 2, 0.5									# The interval and initial value
 	n 		= 5 										# The number of segments
