@@ -15,15 +15,16 @@ sympy.init_printing()
 
 
 # The variables
-t, s	= sympy.symbols('t s')
+t, s	= sympy.symbols('t s') 	# t is the main variable, like f(t), not f(x)
+								# s is not usable 
 
 # Initial conditions
 x 		= np.array((2, 3, 4))
 f 		= 1/t
-p 		= np.array((3.1, 2.9))
+p 		= np.array((3.1, 2.9)) # The point where we want to calculate,
 
 # The calculations
-f 		= sympy.lambdify(t, f, "numpy") # Transform the function to lambdify
+f 		= sympy.lambdify(t, f, "numpy") # Transform the f.unction to lambdify
 y 		= f(x)
 
 print "The y values:"
@@ -62,3 +63,4 @@ print f(p)
 print "The values calculated by interpolation:"
 print g(p)
 '''
+
