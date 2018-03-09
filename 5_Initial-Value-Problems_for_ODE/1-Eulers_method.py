@@ -16,19 +16,21 @@ if __name__ == "__main__":
 	y 		= sp.symbols('y')
 
 	# Initial conditions
-	a, b, c	= 0, 2, 0		# The interval and initial value
+	a, b, c	= 0, 2, 0.5		# The interval and initial value
 	n 		= 5 			# The number of segments
 	f 		= y - t**2 + 1	# The function f(t, y)
 	
 	# The begin to start the calculations
-	f 		= sp.lambdify((y, t), f, "numpy") 			# Transform the function to lambdify
+	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
 	h 		= (b-a)/n 									# The step size
 	t 		= a 										# The frist point that we start
 	w 		= c											# The y values approx
 
 	for i in range(n):
-		w = w + f(w, t)
-		t 	= a + h*(i+1)
+		w  += h*f(t, w)
+		t   = a + h*(i+1)
+
+		#print(str((t, w)))
 
 	# The final result
 	print("The approximated value: y(" + str(b) + ") = " + str(w))
