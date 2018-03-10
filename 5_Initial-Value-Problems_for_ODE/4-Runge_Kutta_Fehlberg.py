@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-		   @file: 3-Runge_Kutta.py
-		   @date: 9th March 2018
+		   @file: 4-Runge_Kutta_Fehlberg.py
+		   @date: 10th March 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: This algorithm returns the final value
+	@description: 
 
 '''
 
