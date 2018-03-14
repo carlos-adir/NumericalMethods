@@ -55,6 +55,10 @@ These functions are to the methods:
 '''
 
 def in3():
+	'''
+	This function is the Second Taylor
+	'''
+
 	# The variables
 	t		= sp.symbols('t')
 	y 		= sp.symbols('y')
@@ -66,13 +70,41 @@ def in3():
 	dfdy	= sp.Add(1)
 	dfdt	= sp.Add(-2*t)
 	
-
+	h = (b-a)/n
 	# The begin to start the calculations
 	f_		= dfdy*f + dfdt								# The frist derivative
-	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
-	f_		= sp.lambdify((t, y), f_, "numpy")
+	T2 		= f+(h/2)*f_
+	T2 		= sp.lambdify((t, y), T2, "numpy") 			# Transform the function to lambdify
 	
-	return a, b, c, n, f, f_
+	return a, b, c, n, T2
+
+
+def in4():
+	'''
+	This function is the Thirth Taylor
+	'''
+
+	# The variables
+	t		= sp.symbols('t')
+	y 		= sp.symbols('y')
+
+	# Initial conditions
+	a, b, c	= 0, 2, 0.5									# The interval and initial value
+	n 		= 10										# The number of segments
+	f 		= y - t**2 + 1								# The function f(t, y)
+	dfdy	= sp.Add(1)
+	d2fdy2	= sp.Add(0)
+	dfdt	= sp.Add(-2*t)
+	d2fdt2	= sp.Add(-2)
+
+	h = (b-a)/n
+	# The begin to start the calculations
+	f_		= dfdy*f + dfdt								# The frist derivative
+	f__		= d2fdy2*f + dfdy*f_ + d2fdt2				# The second derivative
+	T3 		= f+(h/2)*f_+(h**2/6)*f__
+	T3 		= sp.lambdify((t, y), T3, "numpy") 			# Transform the function to lambdify
+	
+	return a, b, c, n, T3
 
 
 '''

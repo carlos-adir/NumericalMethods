@@ -14,14 +14,15 @@ import sympy as sp
 import inputs
 
 if __name__ == "__main__":
-	a, b, c, n, f, f_ = inputs.in3() # The principals inputs
+	a, b, c, n, T = inputs.in3() # The principals inputs
 								 # The function is defined like f(t, y, y', y'', ...)
 
 	h = (b-a)/n
 	t = a
 	w = c
 	for i in range(n):
-		w += h*(f(t, w)+h*f_(t, w)/2)
+		w += h*T(t, w)
+		t = a + (i+1)*h
 		print(w)
 
 	print(w)
