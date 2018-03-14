@@ -49,12 +49,40 @@ def in2():
 
 '''
 
+These functions are to the methods:
+* 2-Taylor
+
+'''
+
+def in3():
+	# The variables
+	t		= sp.symbols('t')
+	y 		= sp.symbols('y')
+
+	# Initial conditions
+	a, b, c	= 0, 2, 0.5									# The interval and initial value
+	n 		= 10										# The number of segments
+	f 		= y - t**2 + 1								# The function f(t, y)
+	dfdy	= sp.Add(1)
+	dfdt	= sp.Add(-2*t)
+	
+
+	# The begin to start the calculations
+	f_		= dfdy*f + dfdt								# The frist derivative
+	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
+	f_		= sp.lambdify((t, y), f_, "numpy")
+	
+	return a, b, c, n, f, f_
+
+
+'''
+
 These functions are to:
 * 4-Runge_Kutta_Fehlberg 
 
 '''
 
-def in3():
+def in5():
 	# The variables
 	t		= sp.symbols('t')
 	y 		= sp.symbols('y')
