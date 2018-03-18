@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 		   @file: 1-Eulers_method.py
-		   @date: 28th September 2017
+		   @date: 10th March 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: Para os algoritmos que utilizam os métodos de taylor, além de ter necessariamente
 				  a função f(t, y), é necessário saber também as derivadas de f(t, y) em relação a 
