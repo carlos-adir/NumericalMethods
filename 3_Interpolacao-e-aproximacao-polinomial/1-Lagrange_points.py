@@ -7,49 +7,40 @@
 '''
 
 import numpy as np
-import sympy
+import sympy as sp
+import inputs
 
-sympy.init_printing()
+if __name__ == "__main__":
+	x, y, p, f = inputs.in1()
 
+	# The variables
+	t 		= sp.symbols('t')
 
+	# The calculations
+	n = len(x)
+	L = []
+	for i in range(n):
+		Li = 1
+		for j in range(n):
+			if i != j:
+				Li *= (t-x[j])/(x[i]-x[j])
+		L.append(Li)
 
-# The variables
-t 		= sympy.symbols('t')
+	g = 0
+	for i in range(n):
+		g += L[i] * y[i]
+	g = sp.simplify(g)
 
+	print("The L functions:")
+	for Li in L:
+		print(Li)
+	print("The final function:")
+	print(f)
+	print('\n')
 
-# Initial conditions
-# If the points are given
+	g 		= sp.lambdify(t, g, "numpy") # Transform the function to lambdify
 
-x 		= np.array((2, 2.75, 4))
-y 		= np.array((1.0/2, 1.0/2.75, 1.0/4))
-p 		= np.array((3, 2.9))
-
-# The calculations
-
-n = len(x)
-L = []
-for i in xrange(n):
-	Li = 1
-	for j in xrange(n):
-		if i != j:
-			Li *= (t-x[j])/(x[i]-x[j])
-	L.append(Li)
-
-f = 0
-for i in xrange(n):
-	f += L[i] * y[i]
-f = sympy.simplify(f)
-
-print "The L functions:"
-print L
-print "The final function:"
-print f
-print '\n'
-
-f 		= sympy.lambdify(t, f, "numpy") # Transform the function to lambdify
-f 		= f(p)
-
-print "The correct values:"
-print 1/p
-print "The values calculated by interpolation:"
-print f
+	print("The correct values:")
+	print(f(p))
+	print("The values calculated by interpolation:")
+	print(g(p))

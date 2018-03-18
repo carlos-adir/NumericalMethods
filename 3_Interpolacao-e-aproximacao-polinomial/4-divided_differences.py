@@ -7,58 +7,44 @@
 '''
 
 import numpy as np
-import sympy
+import sympy as sp
+import inputs
 
-sympy.init_printing()
+if __name__ == "__main__":
+	x, y, p, f = inputs.in1()
 
+	# The variables
+	t 		= sp.symbols('t')
 
+	# The calculations
+	n 		= len(x)
+	F		= []
+	for i in range(n):
+		F.append([y[i]])
+		for j in range(1, i+1):
+			F[i].append((F[i][j-1] - F[i-1][j-1])/(x[i]-x[i-j]))
 
-# The variables
-t 		= sympy.symbols('t')
+	a 		= []
+	for i in range(n):
+		a.append(F[i][i])
 
+	print("The a values:")
+	print(a)
 
-# Initial conditions
+	g 		= a[n-1] 
+	for i in range(n-1, 0, -1):
+		g  *= (t-x[i-1])
+		g  += a[i-1]
 
-x 		= np.array((2, 2.75, 4))
-f 		= 1/t
-p 		= np.array((3, 2.9))
+	print("The function:")
+	print(g)
+	g = sp.expand(g)
+	print("Expanded:")
+	print(g)
 
-# The calculations
+	g = sp.lambdify(t, g, "numpy")
 
-f 		= sympy.lambdify(t, f, "numpy") # Transform the function to lambdify
-y 		= f(x)
-
-print "The y values:"
-print y
-
-n 		= len(x)
-F		= []
-for i in xrange(n):
-	F.append([y[i]])
-	for j in xrange(1, i+1):
-		F[i].append((F[i][j-1] - F[i-1][j-1])/(x[i]-x[i-j]))
-
-a 		= []
-for i in xrange(n):
-	a.append(F[i][i])
-
-print "The a values:"
-print a
-
-g 		= a[n-1] 
-for i in xrange(n-1, 0, -1):
-	g  *= (t-x[i-1])
-	g  += a[i-1]
-
-print "The function:"
-print g
-g = sympy.expand(g)
-print "Expanded:"
-print g
-
-g = sympy.lambdify(t, g, "numpy")
-
-print "The correct values:"
-print f(p)
-print "The values calculated by interpolation:"
-print g(p)
+	print("The correct values:")
+	print(f(p))
+	print("The values calculated by interpolation:")
+	print(g(p))

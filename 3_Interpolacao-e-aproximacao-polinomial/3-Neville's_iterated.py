@@ -7,49 +7,35 @@
 '''
 
 import numpy as np
-import sympy
+import sympy as sp
+import inputs
 
-sympy.init_printing()
+if __name__ == "__main__":
+	x, y, p, f = inputs.in1()
 
+	# The variables
+	t 		= sp.symbols('t')
 
+	# The calculations
+	n 		= len(x)
+	Q		= []
+	for i in range(n):
+		Q.append([y[i]])
+		for j in range(1, i+1):
+			Q[i].append(sp.simplify(((t-x[i-j])*Q[i][j-1] - (t-x[i])*Q[i-1][j-1])/(x[i]-x[i-j])))
 
-# The variables
-t 		= sympy.symbols('t')
+	q 		= []
+	for i in range(n):
+		q.append(sp.simplify(Q[i][i]))
+		q[i] = sp.lambdify(t, q[i], "numpy")
 
-
-# Initial conditions
-
-x 		= np.array((2, 2.75, 4))
-f 		= 1/t
-p 		= np.array((3, 2.9))
-
-# The calculations
-
-f 		= sympy.lambdify(t, f, "numpy") # Transform the function to lambdify
-y 		= f(x)
-
-print "The y values:"
-print y
-
-n 		= len(x)
-Q		= []
-for i in xrange(n):
-	Q.append([y[i]])
-	for j in xrange(1, i+1):
-		Q[i].append(sympy.simplify(((t-x[i-j])*Q[i][j-1] - (t-x[i])*Q[i-1][j-1])/(x[i]-x[i-j])))
-
-q 		= []
-for i in xrange(n):
-	q.append(sympy.simplify(Q[i][i]))
-	q[i] = sympy.lambdify(t, q[i], "numpy")
-
-print "The Q functions:"
-for i in Q:
-	print i
+	print("The Q functions:")
+	for i in Q:
+		print(i)
 
 
-print "The correct values:"
-print f(p)
-print "The values calculated by interpolation:"
-for i in xrange(n):
-	print "q[" + str(i) + "] = " + str(q[i](p))
+	print("The correct values:")
+	print(f(p))
+	print("The values calculated by interpolation:")
+	for i in range(n):
+		print("q[" + str(i) + "] = " + str(q[i](p)))
