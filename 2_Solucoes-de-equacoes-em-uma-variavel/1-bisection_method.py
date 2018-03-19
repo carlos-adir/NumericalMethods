@@ -11,7 +11,7 @@ import sympy as sp
 #import roots
 import inputs
 
-if __name__ == "__main__"
+if __name__ == "__main__":
 
 	a, b, f, tol, nmax = inputs.in1()
 
@@ -35,10 +35,10 @@ if __name__ == "__main__"
 			b  = p
 
 	if n == nmax:
-		print 'The process stoped by the number of iterations'
+		print('The process stoped by the number of iterations')
 	else:
-		print 'The process stoped by the tolerance'
+		print('The process stoped by the tolerance')
 
-	print "The approximate value with n = " + str(n)
-	print "And error " + str((b-a)/2) + " is:"
-	print p
+	print("The approximate value with n = " + str(n))
+	print("And error " + str((b-a)/2) + " is:")
+	print(p)
