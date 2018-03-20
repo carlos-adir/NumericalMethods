@@ -16,7 +16,7 @@ Visite o [wiki](https://github.com/CarlosAdir/Metodos-Numericos/wiki), pois nele
 
 ## Objetivo
 
-Implementar algoritmos de Calculo Numérico em Python e criar tutoriais de como utilizar os algoritmos implementados([veja o wiki](https://github.com/CarlosAdir/Metodos-Numericos/wiki)).
+Implementar algoritmos de Calculo Numérico em Python e criar tutoriais de como utilizar os algoritmos implementados([veja o wiki](https://github.com/CarlosAdir/Metodos-Numericos/wiki)). Isso somente para fins didáticos.
 
 ## Organização
 
