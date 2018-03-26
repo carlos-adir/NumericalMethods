@@ -2,11 +2,17 @@
 		   @file: 1-bisection_method.py
    		   @date: 17th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: O algoritmo da bissecção faz uso do teorema do valor intermediário que indica
+					que se uma função é contínua em um intervalo [a, b], e f(a) e f(b) tem sinais
+					opostos, significa que existe pelo menos uma raiz no intervalo [a, b].
+					A ideia consiste entao em repartir o intervalo [a, b] na metade, e sucessivamente
+					ir escolhendo um intervalo menor em que a raiz está contida.
+					Mais informacoes no wiki:
+					https://github.com/CarlosAdir/Metodos-Numericos/wiki/2:1:Metodo-da-Bisseccao 
 
 '''
 
-import numpy as np
+import numpy as np # Nao utilizado, mas um potencial
 import sympy as sp
 #import roots
 import inputs
@@ -15,17 +21,15 @@ if __name__ == "__main__":
 
 	a, b, f, tol, nmax = inputs.in1()
 
-	# There at least one root in the interval [a, b]
-	# And we show on the screen the root using the sympy algorithms
-	# roots.root(a, b, f)
+	# Existe pelo menos uma raiz no intervalo [a, b]
 
-	# The calculations
-	n 		= 0 							# Because we are in the frist interaction
-	fa		= f(a)							# We calculate the first point, the left
-	while n < nmax:							# To never be a infinite loop
-		p 	= a + (b-a)/2					# We calculate the midle coordinate
-		fp 	= f(p)
-		if fp == 0 or (b-a)/2 < tol:		# Verifies if we found the root exaclty on p, or when the size of interval is too small
+	# Os calculos
+	n 		= 0 							# Porque estamos na primeira interacao
+	fa		= f(a)							# Calculamos o primeiro ponto, o da esquerda
+	while n < nmax:							# Um loop com uma condição de parada, para fazer as iteracoes.
+		p 	= a + (b-a)/2					# Calculamos o ponto médio do intervalo
+		fp 	= f(p)							# Calculamos o valor da função nesse ponto médio
+		if fp == 0 or (b-a)/2 < tol:		# Verifica se encontramos exatamente a raiz em p, ou quando o tamanho do intervalo é muito pequeno
 			break
 		n  += 1
 		if fa*fp > 0:
