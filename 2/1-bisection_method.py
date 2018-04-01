@@ -16,12 +16,11 @@ import numpy as np # Nao utilizado, mas um potencial
 import sympy as sp
 #import roots
 import inputs
+import results
 
 if __name__ == "__main__":
 
 	a, b, f, tol, nmax = inputs.in1()
-
-	# Existe pelo menos uma raiz no intervalo [a, b]
 
 	# Os calculos
 	n 		= 0 							# Porque estamos na primeira interacao
@@ -38,11 +37,4 @@ if __name__ == "__main__":
 		else:
 			b  = p
 
-	if n == nmax:
-		print('The process stoped by the number of iterations')
-	else:
-		print('The process stoped by the tolerance')
-
-	print("The approximate value with n = " + str(n))
-	print("And error " + str((b-a)/2) + " is:")
-	print(p)
+	results.show(n, nmax, (b-a)/2, p)
