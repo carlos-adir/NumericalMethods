@@ -2,6 +2,8 @@
 
 ## Introdução
 
+Veja o wiki: [2:Soluções de equações de uma variável](https://github.com/CarlosAdir/Metodos-Numericos/wiki/2:Solucoes-de-equacoes-uma-variavel)
+
 ## 1 - Método da Bissecção
 
 ## 2 - Método do Ponto Fixo
