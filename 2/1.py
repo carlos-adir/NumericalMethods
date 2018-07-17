@@ -14,14 +14,68 @@
 
 import numpy as np # Nao utilizado, mas um potencial
 import sympy as sp
-#import roots
+import matplotlib.pyplot as plt
 import inputs
 import results
 
-if __name__ == "__main__":
+def show(n, nmax, error, value):
+	error = abs(error)
 
-	a, b, f, tol, nmax = inputs.in1()
+	if n == nmax:
+		print('The process stoped by the number of iterations')
+	else:
+		print('The process stoped by the tolerance')
 
+	print("The approximate value with n = " + str(n))
+	print("And error " + str(error) + " is:")
+	print(value)
+
+def img(a, b, funcoes, raiz):
+	X = np.linspace(a, b, 1024)
+	Y = f.e(X)
+
+	# Para alterar o range do eixo X
+	axes = plt.gca()
+	axes.set_xlim([a - (b-a)/5, b + (b-a)/5])
+	
+	plt.grid(True, which='both')
+	plt.plot(X, Y, label = f.l)
+
+	plt.annotate(str(raiz),
+				ha = 'center', va = 'bottom',
+				xytext = (raiz - (b-a)/5, f.e(raiz)), 
+				xy = (raiz, f.e(raiz)),
+				bbox=dict(boxstyle="round4", fc="w"),
+				arrowprops = dict(arrowstyle="->"))
+	plt.scatter(raiz, f.e(raiz), c = 'k', s = 25.)
+
+	plt.annotate("a",
+				ha = 'center', va = 'bottom',
+				xytext = (a+(b-a)/5, f.e(a)), 
+				xy = (a, f.e(a)),
+				bbox=dict(boxstyle="round4", fc="w"),
+				arrowprops = dict(arrowstyle="->"))
+	plt.scatter(a, f.e(a), c = 'k', s = 25.)
+	plt.annotate("b",
+				ha = 'center', va = 'bottom',
+				xytext = (b-(b-a)/5, f.e(b)), 
+				xy = (b, f.e(b)),
+				bbox=dict(boxstyle="round4", fc="w"),
+				arrowprops = dict(arrowstyle="->"))
+	plt.scatter(b, f.e(b), c = 'k', s = 25.)
+
+
+	X = np.linspace(a - (b-a)/2, b + (b-a)/2, 10)
+	plt.legend()
+	plt.plot(X, np.zeros(len(X)), linewidth = 2., c = 'k')
+
+	plt.title("Grafico das funções")
+	plt.xlabel('Eixo $t$')
+	plt.ylabel('Eixo $y$')
+
+	plt.show()
+
+def Bissection(a, b, f, tol, nmax):
 	# Os calculos
 	n 		= 0 							# Porque estamos na primeira interacao
 	fa		= f(a)							# Calculamos o primeiro ponto, o da esquerda
@@ -36,5 +90,13 @@ if __name__ == "__main__":
 			fa = fp
 		else:
 			b  = p
+	error = (b-a)/2
+	return error, p, n
 
-	results.show(n, nmax, (b-a)/2, p)
+if __name__ == "__main__":
+
+	a, b, f, tol, nmax = inputs.in1(1)
+	error, p, n = Bissection(a, b, f.e, tol, nmax)
+	
+	show(n, nmax, error, p)
+	img(a, b, [f], p)
