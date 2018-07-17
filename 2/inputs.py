@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 		   @file: input.py
-		   @date: 09th March 2018
+		   @date: 17th July 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: This code is to be the inputs of the codes, only for don't repeat the same part of code
 					in all the files
@@ -160,3 +160,53 @@ def in3(number = 1):
 	f_		= Funcao(f_eval, f_latex)
 
 	return p0, f, f_, tol, nmax
+	
+def in4(number = 1):
+	'''
+	Esta funcao é apenas para o algoritmo 1.py
+	'''
+	# The variables
+	t		= sp.symbols('t')
+	limites = [1, 3]
+
+
+
+
+
+	if number < limites[0]:
+		number = limites[0]
+	if number > limites[1]:
+		number = limites[1]
+	# Initial conditions
+	if number == 1:
+		p0, p1	= 1, 2							# The interval, it's suppose that a < b
+		f		= t**2 - 3						# The function
+		tol		= 1e-5 							# The max error acceptable
+		nmax	= 10 							# Max number iteractions  
+	elif number == 2:
+		p0, p1  = 2, 4							# The interval, it's suppose that a < b
+		f       = t**2-2*t-4	 				# The function
+		tol     = 1e-5 							# The max error acceptable
+		nmax    = 10 							# Max number iteractions
+	elif number == 3:
+		p0, p1	= 1, 2							# The interval, it's suppose that a < b
+		f       = t**3+4*t**2-10 				# The function
+		tol     = 1e-5							# The max error acceptable
+		nmax    = 10							# Max number iteractions
+
+
+
+	# The begin to start the calculations
+	feval 	= sp.lambdify(t, f, "numpy")
+	flatex	= "$f(t) = " + toLaTeX(f)
+	f		= Funcao(feval, flatex)
+	return p0, p1, f, tol, nmax
+
+
+
+def in5(number = 1):
+	'''
+	Esta funcao é apenas para o algoritmo 1.py
+	'''
+	# The variables
+	return in4(number)

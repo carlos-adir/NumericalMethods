@@ -1,8 +1,12 @@
 '''
-		   @file: 3-Newton's_method.py
-   		   @date: 17th September 2017
+		   @file: 3.py
+   		   @date: 17th July 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: 	Método de Newton
+					Este algoritmo é a representação do algoritmo de Newton para achar raizes
+					Uma das grandes vantagens de utilizar esse método é a sua rapida convergência
+					Contudo, um dos problemas é que caso a derivaa se anule ao redor da raiz,
+					o algoritmo provavelmente dará problema
 
 '''
 
@@ -13,8 +17,7 @@ import inputs
 import results
 
 
-def show(n, nmax, intervalo, value):
-	error = (intervalo[1]-intervalo[0])/2.
+def show(n, nmax, error, value):
 	error = abs(error)
 
 	if n == nmax:
@@ -79,17 +82,16 @@ def Newton(p0, f, f_, tol, nmax):
 		fp = f(p0)
 		dfp = f_(p0)
 		p = p0 - fp/dfp
-
-		if abs(p - p0) < tol or abs(p - p0) > tolmax:
-			return [p, p0], p, n
-
 		n += 1
+		if abs(p - p0) < tol or abs(p - p0) > tolmax:
+			error = (p-p0)/2
+			return n, error, p
 		p0 = p
 
 if __name__ == "__main__":
 
-	p0, f, f_, tol, nmax = inputs.in3(3)
-	intervalo, p, n = Newton(p0, f.e, f_.e, tol, nmax)
+	p0, f, f_, tol, nmax = inputs.in3(1)
+	n, error, p = Newton(p0, f.e, f_.e, tol, nmax)
 	
-	show(n, nmax, intervalo, p)
+	show(n, nmax, error, p)
 	img([f, f_], p, p0)

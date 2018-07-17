@@ -1,8 +1,10 @@
 '''
-		   @file: 2-fixed_point_iteration.py
-   		   @date: 17th September 2017
+		   @file: 2.py
+   		   @date: 17th July 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: Método Iterativo do Ponto Fixo
+					Esse algoritmo é a implementação do algoritmo de ponto fixo.
+					Ele mostra o resultado final, bem como o gráfico da curva ao redor do ponto de interesse
 
 '''
 
@@ -75,12 +77,11 @@ def FixedPoint(p0, g, g_, tol, nmax): # Este algoritmo não é muito robusto, ca
 	while 1:
 		p 	= g(p0)
 		p_	= g_(p0)
+		n  += 1
 		if abs(p - p0) < tol or n == nmax or (not abs(p_) < 1):
 			error = (p-p0)/2.
-			break
-		n  += 1
+			return n, error, p, p_
 		p0	= p
-	return n, error, p, p_
 
 def getAB(p0, f): # Para retornar os valores de a e de b para poder imprimir o valor na tela.
 				  # É utilizado o metodo da bissecção
@@ -93,9 +94,9 @@ def getAB(p0, f): # Para retornar os valores de a e de b para poder imprimir o v
 	while n < nmax:							# Um loop com uma condição de parada, para fazer as iteracoes.
 		p 	= a + (b-a)/2					# Calculamos o ponto médio do intervalo
 		fp 	= f(p)							# Calculamos o valor da função nesse ponto médio
+		n  += 1
 		if fp == 0 or (b-a)/2 < tol:		# Verifica se encontramos exatamente a raiz em p, ou quando o tamanho do intervalo é muito pequeno
 			break
-		n  += 1
 		if fa*fp > 0:
 			a  = p
 			fa = fp

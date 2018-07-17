@@ -1,8 +1,9 @@
 '''
-		   @file: 1-bisection_method.py
-   		   @date: 17th September 2017
+		   @file: 1.py
+   		   @date: 17th July 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: O algoritmo da bissecção faz uso do teorema do valor intermediário que indica
+	@description: Método da Bissecção
+					O algoritmo da bissecção faz uso do teorema do valor intermediário que indica
 					que se uma função é contínua em um intervalo [a, b], e f(a) e f(b) tem sinais
 					opostos, significa que existe pelo menos uma raiz no intervalo [a, b].
 					A ideia consiste entao em repartir o intervalo [a, b] na metade, e sucessivamente
@@ -82,21 +83,21 @@ def Bissection(a, b, f, tol, nmax):
 	while n < nmax:							# Um loop com uma condição de parada, para fazer as iteracoes.
 		p 	= a + (b-a)/2					# Calculamos o ponto médio do intervalo
 		fp 	= f(p)							# Calculamos o valor da função nesse ponto médio
+		n  += 1
 		if fp == 0 or (b-a)/2 < tol:		# Verifica se encontramos exatamente a raiz em p, ou quando o tamanho do intervalo é muito pequeno
 			break
-		n  += 1
 		if fa*fp > 0:
 			a  = p
 			fa = fp
 		else:
 			b  = p
 	error = (b-a)/2
-	return error, p, n
+	return n, error, p
 
 if __name__ == "__main__":
 
 	a, b, f, tol, nmax = inputs.in1(1)
-	error, p, n = Bissection(a, b, f.e, tol, nmax)
+	n, error, p = Bissection(a, b, f.e, tol, nmax)
 	
 	show(n, nmax, error, p)
 	img(a, b, [f], p)
