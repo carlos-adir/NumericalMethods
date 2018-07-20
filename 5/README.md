@@ -14,9 +14,15 @@ dy/dt = f(t, y)
 
 quando t está no intervalo [a, b] and temos um valor inicial y(a) = c. 
 
+Feito
+
 ## 2 - Método de Taylor
 
+Feito
+
 ## 3 - Método de Runge-Kutta
+
+Feito, mas vou alterar o número para colocar coisas intermediarias
 
 ## 4 - Método de Runge-Kutta-Fehlberg
 
