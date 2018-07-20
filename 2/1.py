@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 		   @file: 1.py
    		   @date: 17th July 2018
@@ -13,71 +14,13 @@
 
 '''
 
-import numpy as np # Nao utilizado, mas um potencial
-import sympy as sp
-import matplotlib.pyplot as plt
-import inputs
-import results
-
-def show(n, nmax, error, value):
-	error = abs(error)
-
-	if n == nmax:
-		print('The process stoped by the number of iterations')
-	else:
-		print('The process stoped by the tolerance')
-
-	print("The approximate value with n = " + str(n))
-	print("And error " + str(error) + " is:")
-	print(value)
-
-def img(a, b, funcoes, raiz):
-	X = np.linspace(a, b, 1024)
-	Y = f.e(X)
-
-	# Para alterar o range do eixo X
-	axes = plt.gca()
-	axes.set_xlim([a - (b-a)/5, b + (b-a)/5])
-	
-	plt.grid(True, which='both')
-	plt.plot(X, Y, label = f.l)
-
-	plt.annotate(str(raiz),
-				ha = 'center', va = 'bottom',
-				xytext = (raiz - (b-a)/5, f.e(raiz)), 
-				xy = (raiz, f.e(raiz)),
-				bbox=dict(boxstyle="round4", fc="w"),
-				arrowprops = dict(arrowstyle="->"))
-	plt.scatter(raiz, f.e(raiz), c = 'k', s = 25.)
-
-	plt.annotate("a",
-				ha = 'center', va = 'bottom',
-				xytext = (a+(b-a)/5, f.e(a)), 
-				xy = (a, f.e(a)),
-				bbox=dict(boxstyle="round4", fc="w"),
-				arrowprops = dict(arrowstyle="->"))
-	plt.scatter(a, f.e(a), c = 'k', s = 25.)
-	plt.annotate("b",
-				ha = 'center', va = 'bottom',
-				xytext = (b-(b-a)/5, f.e(b)), 
-				xy = (b, f.e(b)),
-				bbox=dict(boxstyle="round4", fc="w"),
-				arrowprops = dict(arrowstyle="->"))
-	plt.scatter(b, f.e(b), c = 'k', s = 25.)
-
-
-	X = np.linspace(a - (b-a)/2, b + (b-a)/2, 10)
-	plt.legend()
-	plt.plot(X, np.zeros(len(X)), linewidth = 2., c = 'k')
-
-	plt.title("Grafico das funções")
-	plt.xlabel('Eixo $t$')
-	plt.ylabel('Eixo $y$')
-
-	plt.show()
+import sys
+import aux
 
 def Bissection(a, b, f, tol, nmax):
 	# Os calculos
+	if type(f) != type(Bissection): 		# Para ver se f é uma função já ou se é uma classe. Pois queremos uma função
+		f 		= f.e
 	n 		= 0 							# Porque estamos na primeira interacao
 	fa		= f(a)							# Calculamos o primeiro ponto, o da esquerda
 	while n < nmax:							# Um loop com uma condição de parada, para fazer as iteracoes.
@@ -95,9 +38,16 @@ def Bissection(a, b, f, tol, nmax):
 	return n, error, p
 
 if __name__ == "__main__":
-
-	a, b, f, tol, nmax = inputs.in1(1)
-	n, error, p = Bissection(a, b, f.e, tol, nmax)
-	
-	show(n, nmax, error, p)
-	img(a, b, [f], p)
+	inp, img, show = aux.get_all(sys.argv)
+	# Aqui pega as funções base a partir dos argumentos digitados no terminal
+	a, b, f, tol, nmax = inp()
+	# Pega os valores de entrada, com base nos argumentos digitados no terminal
+	n, error, r = Bissection(a, b, f, tol, nmax)
+	# Aqui fazemos o metodo da Bissecção
+	# Aqui obtemos o valor de n, que é a quantidade de iterações que ja foram feitas
+	# O valor de error, que é o erro estimado da raiz. Esse erro é sempre maior que o erro real
+	# E também o valor estimado da raiz, que chamamos de r
+	show(n, nmax, error, r)
+	# Essa funcao informa os resultados obtidos com n, com nmax, erro e o valor da raiz
+	img(a, b, [f], r)
+	# Aqui plota o gráfico da curva, com o ponto em que a raiz se encontra

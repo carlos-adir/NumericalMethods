@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 		   @file: 2.py
    		   @date: 17th July 2018
@@ -8,78 +9,18 @@
 
 '''
 
-import numpy as np # Nao utilizado, mas um potencial
-import sympy as sp
-import matplotlib.pyplot as plt
-import inputs
-import results
+import sys
+import aux
 
-
-def show(n, nmax, error, p, p_):
-	error = abs(error)
-
-	if abs(p_) > 1:
-		print("The process stoped because g'(p) >= 1")
-	else:
-		if n == nmax:
-			print('The process stoped by the number of iterations')
-		else:
-			print('The process stoped by the tolerance')
-		print("The approximate value with n = " + str(n))
-		print("And error " + str(error) + " is:")
-		print(p)
-
-def img(a, b, funcoes, raiz, p0):
-	X = np.linspace(a, b, 1024)
-	
-	# Para alterar o range do eixo X
-	axes = plt.gca()
-	axes.set_xlim([a - (b-a)/5, b + (b-a)/5])
-	
-	# Adicionar  a malha
-	plt.grid(True, which='both')
-
-	# Adicionar a raiz
-	plt.annotate(str(raiz),
-				ha = 'center', va = 'bottom',
-				xytext = (raiz - (b-a)/5, funcoes[0].e(raiz)), 
-				xy = (raiz, funcoes[0].e(raiz)),
-				bbox=dict(boxstyle="round4", fc="w"),
-				arrowprops = dict(arrowstyle="->"))
-	plt.scatter(raiz, funcoes[0].e(raiz), c = 'k', s = 25.)
-
-	plt.annotate("$p_0$",
-				ha = 'center', va = 'bottom',
-				xytext = (p0 - (b-a)/5, funcoes[0].e(p0)), 
-				xy = (p0, funcoes[0].e(p0)),
-				bbox=dict(boxstyle="round4", fc="w"),
-				arrowprops = dict(arrowstyle="->"))
-	plt.scatter(p0, funcoes[0].e(p0), c = 'k', s = 25.)
-
-	for f in funcoes:
-		Y = f.e(X)		
-		plt.plot(X, Y, label = f.l)
-
-
-	# Para plotar o eixo t, ou seja y = 0
-	X = np.linspace(a - (b-a)/2, b + (b-a)/2, 10)
-	plt.legend()
-	plt.plot(X, np.zeros(len(X)), linewidth = 2., c = 'k')
-
-	plt.title("Grafico das funções")
-	plt.xlabel('Eixo $t$')
-	plt.ylabel('Eixo $y$')
-
-	plt.show()
 
 def FixedPoint(p0, g, g_, tol, nmax): # Este algoritmo não é muito robusto, caso g' fique 1 ou maior, ele diverge
 	n 		= 0
 	while 1:
 		p 	= g(p0)
+		error = (p-p0)/2.
 		p_	= g_(p0)
 		n  += 1
-		if abs(p - p0) < tol or n == nmax or (not abs(p_) < 1):
-			error = (p-p0)/2.
+		if abs(error) < tol or n == nmax or (not abs(p_) < 1):
 			return n, error, p, p_
 		p0	= p
 
@@ -106,15 +47,28 @@ def getAB(p0, f): # Para retornar os valores de a e de b para poder imprimir o v
 	a	= p - 3*size_interval
 	b	= p + 3*size_interval 
 	return a, b
-	
-
-
 		
 
 if __name__ == "__main__":
-	p0, f, g, g_, tol, nmax = inputs.in2(2)
+	inp, img, show = aux.get_all(sys.argv)
+	# Aqui pega as funções base a partir dos argumentos digitados no terminal
+	p0, f, g, g_, tol, nmax = inp()
+	# Pega os valores de entrada, com base nos argumentos digitados no terminal
 	a, b  = getAB(p0, f.e)
-	n, error, p, p_ = FixedPoint(p0, g.e, g_.e, tol, nmax)
-
-	show(n, nmax, (p-p0)/2, p, p_)
-	img(a, b, [f, g, g_], p, p0)
+	# Aqui pegamos uma estimativa do intervalo [a, b] para se plotar o gráfico.
+	# Isso porque diferentemente do método da bissecção, em que é dado um intervalo já para se plotar o gráfico
+	# Esse metodo iterativo não fornece o intervalo, apenas valores
+	n, error, r, p_ = FixedPoint(p0, g.e, g_.e, tol, nmax)
+	# Fazemos os calculos, e obtemos então 4 valores que são respectivamente
+	# O numero de iterações feitas
+	# O valor do erro estimado, sempre maior que o real
+	# O valor r da raiz
+	# O valor de p' na iteração n. Esse valor é pego apenas para saber se o processo foi interrompido porque |g'(p)| >= 1
+	show(n, nmax, error, r, p_)
+	# Mostramos os resultados na tela, sabendo o numero de iterações e o maximo
+	# O valor do erro
+	# O valor da raiz, caso o processo tenha sido um sucesso(não foi interrompido por |p_| >= 1)
+	# E o valor de p_ para saber se foi interrompido por |g'(p)| >= 1 ou não
+	img(a, b, [f, g, g_], r, p0)
+	# e plotamos os gráficos das funções [f, g, g_] no intervalo [a, b]
+	# Bem como mostramos o ponto da raiz r e a estimativa inicial p0

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 		   @file: input.py
-		   @date: 17th July 2018
+		   @date: 
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
 	@description: This code is to be the inputs of the codes, only for don't repeat the same part of code
 					in all the files
@@ -10,35 +10,40 @@
 
 import sympy as sp
 import numpy as np
+import aux
 
-class Funcao(object):
-	"""docstring for funcao"""
-	def __init__(self, evalu, latex):
-		self.e = evalu
-		self.l = latex
-		
 
-def toLaTeX(lat):
-	cdot	= ' \\cdot '
-	return str(lat).replace('**', '^').replace('*', cdot) + '$'
+limites = [	[1, 3],\
+			[1, 5],\
+			[1, 3],\
+			[1, 3],\
+			[1, 3]]
 
-def in1(number = 1):
+def get(algorithm, number):
+	if algorithm == 1:
+		return lambda : in1(number)
+	elif algorithm == 2:
+		return lambda : in2(number)
+	elif algorithm == 3:
+		return lambda : in3(number)
+	elif algorithm == 4:
+		return lambda : in4(number)
+	elif algorithm == 5:
+		return lambda : in5(number)
+
+def in1(number):
 	'''
 	Esta funcao é apenas para o algoritmo 1.py
 	'''
 	# The variables
-	t		= sp.symbols('t')
-	limites = [1, 3]
-
-
-
-
-
-	if number < limites[0]:
-		number = limites[0]
-	if number > limites[1]:
-		number = limites[1]
+	limite = limites[1-1] # 1 - 1 porque é o primeiro conjunto de dados,	
+						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
 	# Initial conditions
+	t		= sp.symbols('t')
 	if number == 1:
 		a, b    = 1, 2							# The interval, it's suppose that a < b
 		f       = t**2 - 3						# The function
@@ -59,26 +64,23 @@ def in1(number = 1):
 
 	# The begin to start the calculations
 	feval 	= sp.lambdify(t, f, "numpy")
-	flatex	= "$f(t) = " + toLaTeX(f)
-	f		= Funcao(feval, flatex)
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f		= aux.Funcao(feval, flatex)
 	return a, b, f, tol, nmax
 
-def in2(number = 1):
+def in2(number):
 	'''
 	Esta funcao é apenas para o algoritmo 2.py
 	'''
 	# The variables
-	t		= sp.symbols('t')
-	limites = [1, 5]
-
-
-
-
-	if number < limites[0]:
-		number = limites[0]
-	if number > limites[1]:
-		number = limites[1]
+	limite = limites[2-1] # 1 - 1 porque é o primeiro conjunto de dados,	
+						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
 	# Initial conditions
+	t		= sp.symbols('t')
 	if 1 <= number <= 5:
 		p0 		= 1.5 							# The initial aproximation
 		f       = t**3+4*t**2-10 				# The function that we want to calculate the roots
@@ -99,38 +101,34 @@ def in2(number = 1):
 	g_ 		= sp.diff(g, t)						# The function g' derivative of g
 	
 	feval 	= sp.lambdify(t, f, "numpy")
-	flatex	= "$f(t) = " + toLaTeX(f)
-	f		= Funcao(feval, flatex)
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f		= aux.Funcao(feval, flatex)
 
 	geval 	= sp.lambdify(t, g, "numpy")
-	glatex	= "$g(t) = " + toLaTeX(g)
-	g		= Funcao(geval, glatex)
+	glatex	= "$g(t) = " + aux.toLaTeX(g)
+	g		= aux.Funcao(geval, glatex)
 
 	g_eval 	= sp.lambdify(t, g_, "numpy")
-	g_latex	= "$g'(t) = " + toLaTeX(g_)
-	g_		= Funcao(g_eval, g_latex)
+	g_latex	= "$g'(t) = " + aux.toLaTeX(g_)
+	g_		= aux.Funcao(g_eval, g_latex)
 
 	
 
 	return p0, f, g, g_, tol, nmax
 
-def in3(number = 1):
+def in3(number):
 	'''
 	Esta funcao é apenas para o algoritmo 1.py
 	'''
 	# The variables
-	t		= sp.symbols('t')
-	limites = [1, 3]
-
-
-
-
-
-	if number < limites[0]:
-		number = limites[0]
-	if number > limites[1]:
-		number = limites[1]
+	limite = limites[3-1] # 1 - 1 porque é o primeiro conjunto de dados,	
+						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
 	# Initial conditions
+	t		= sp.symbols('t')
 	if number == 1:
 		p0		= 1.5							# The interval, it's suppose that a < b
 		f       = t**2 - 3						# The function
@@ -152,32 +150,28 @@ def in3(number = 1):
 
 	# The begin to start the calculations
 	feval 	= sp.lambdify(t, f, "numpy")
-	flatex	= "$f(t) = " + toLaTeX(f)
-	f		= Funcao(feval, flatex)
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f		= aux.Funcao(feval, flatex)
 
 	f_eval 	= sp.lambdify(t, f_, "numpy")
-	f_latex	= "$f'(t) = " + toLaTeX(f_)
-	f_		= Funcao(f_eval, f_latex)
+	f_latex	= "$f'(t) = " + aux.toLaTeX(f_)
+	f_		= aux.Funcao(f_eval, f_latex)
 
 	return p0, f, f_, tol, nmax
 	
-def in4(number = 1):
+def in4(number):
 	'''
 	Esta funcao é apenas para o algoritmo 1.py
 	'''
 	# The variables
-	t		= sp.symbols('t')
-	limites = [1, 3]
-
-
-
-
-
-	if number < limites[0]:
-		number = limites[0]
-	if number > limites[1]:
-		number = limites[1]
+	limite = limites[4-1] # 1 - 1 porque é o primeiro conjunto de dados,	
+						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
 	# Initial conditions
+	t		= sp.symbols('t')
 	if number == 1:
 		p0, p1	= 1, 2							# The interval, it's suppose that a < b
 		f		= t**2 - 3						# The function
@@ -198,15 +192,20 @@ def in4(number = 1):
 
 	# The begin to start the calculations
 	feval 	= sp.lambdify(t, f, "numpy")
-	flatex	= "$f(t) = " + toLaTeX(f)
-	f		= Funcao(feval, flatex)
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f		= aux.Funcao(feval, flatex)
 	return p0, p1, f, tol, nmax
 
-
-
-def in5(number = 1):
+def in5(number):
 	'''
 	Esta funcao é apenas para o algoritmo 1.py
 	'''
+	limite = limites[5-1] # 1 - 1 porque é o primeiro conjunto de dados,	
+						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
 	# The variables
 	return in4(number)
+
