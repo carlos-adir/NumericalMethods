@@ -1,18 +1,17 @@
+# -*- coding: utf-8 -*-
 '''
-		   @file: 1-Lagrange_points.py
-   		   @date: 17th September 2017
+		   @file: 1.py
+   		   @date: 20th July 2018
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: Metodo de Lagrange
 
 '''
 
-import numpy as np
+import sys
 import sympy as sp
-import inputs
+import aux
 
-if __name__ == "__main__":
-	x, y, p, f = inputs.in1()
-
+def Lagrange(x, y):
 	# The variables
 	t 		= sp.symbols('t')
 
@@ -25,22 +24,18 @@ if __name__ == "__main__":
 			if i != j:
 				Li *= (t-x[j])/(x[i]-x[j])
 		L.append(Li)
-
 	g = 0
 	for i in range(n):
 		g += L[i] * y[i]
 	g = sp.simplify(g)
+	L = aux.Funcao(sp.lambdify(t, g, "numpy"), '$L(t) = ' + aux.toLaTeX(g))
+	return L
 
-	print("The L functions:")
-	for Li in L:
-		print(Li)
-	print("The final function:")
-	print(f)
-	print('\n')
-
-	g 		= sp.lambdify(t, g, "numpy") # Transform the function to lambdify
-
-	print("The correct values:")
-	print(f(p))
-	print("The values calculated by interpolation:")
-	print(g(p))
+if __name__ == "__main__":
+	inp, img, show = aux.get_all(sys.argv)
+	# Aqui pega as funções base a partir dos argumentos digitados no terminal
+	x, y, f = inp()
+	L = Lagrange(x, y) # Pega a função e já deixa no lambdify
+	show(L)
+	img(f, L, x, y)
+	

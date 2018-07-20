@@ -1,4 +1,4 @@
-# Soluções de equações em uma variável
+# Interpolação
 
 ## Introdução
 
@@ -8,21 +8,39 @@ Caso não entenda os algoritmos, procure um livro texto para explicar o algoritm
 
 ## 1 - Método de Lagrange
 
+Terminado
+
 ## 2 - Método Neville
+
+Não terminado
 
 ## 3 - Diferenças Divididas
 
+Não terminado
+
 ## 4 - Diferenças Progressivas
+
+Não terminado
 
 ## 5 - Diferenças Regressivas
 
+Não terminado
+
 ## 6 - Diferenças Centradas
+
+Não terminado
 
 ## 7 - Método de Hermite
 
+Não terminado
+
 ## 8 - Diferenças Divididas de Hermite
 
+Não terminado
+
 ## 9 - Spline Cúbica Natural
+
+Terminado
 
 ## 10 - Spline Cúbica de condições de contorno
 

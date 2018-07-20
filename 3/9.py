@@ -1,66 +1,82 @@
+# -*- coding: utf-8 -*-
 '''
-		   @file: 8-Hermite.py
+		   @file: 9.py
    		   @date: 17th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: Algoritmo de Spline Cubico
 
 '''
 
+import sys
+import aux
 import numpy as np
-import sympy
-from scipy.special import binom
+import sympy as sp
 
-sympy.init_printing()
+def Separavel(sp, x):
+	if type(x) == np.ndarray:
+		n = len(x)
+		y = np.zeros(n)
+		for i in range(n):
+			y[i] = Separavel(sp, x[i])
+		return y
+	else:
+		for j in range(len(sp)):
+			a, b, f = sp[j]
+			if a <= x <= b:
+				return f(x)
 
+def Spline_cubico(x, y):
+	# A funcao ja retorna no modo lambdify
 
+	n	= len(x)-1
+	h	= np.zeros(n+1)
+	al	= np.zeros(n+1) # alpha
+	l 	= np.zeros(n+1)
+	mu	= np.zeros(n+1)
+	z	= np.zeros(n+1)
 
-# The variables
-t, s	= sympy.symbols('t s') 	# t is the main variable, like f(t), not f(x)
-								# s is not usable 
+	a 	= y
+	b	= np.zeros(n+1)
+	c	= np.zeros(n+1)
+	d	= np.zeros(n+1)
 
-# Initial conditions
-x 		= np.array((2, 3, 4))
-f 		= 1/t
-p 		= np.array((3.1, 2.9)) # The point where we want to calculate,
+	for i in range(n):
+		h[i] = x[i+1]-x[i]
+	for i in range(1, n):
+		al[i] = (3/h[i])*(a[i+1]-a[i]) - (3/h[i-1])*(a[i]-a[i-1])
 
-# The calculations
-f 		= sympy.lambdify(t, f, "numpy") # Transform the f.unction to lambdify
-y 		= f(x)
+	l[0]	= 1
+	mu[0]	= 0
+	z[0]	= 0
 
-print "The y values:"
-print y
+	for i in range(1, n):
+		l[i]	= 2*(x[i+1]-x[i-1])-h[i-1]*mu[i-1]
+		mu[i]	= h[i]/l[i]
+		z[i]	= (al[i]-h[i-1]*z[i-1])/l[i]
 
-n 		= len(x)
-F		= []
-for i in xrange(n):
-	F.append([y[i]])
-	for j in xrange(1, i+1):
-		F[i].append(F[i][j-1] - F[i-1][j-1])
+	l[n]	= 1
+	mu[n]	= 0
+	z[n]	= 0
 
-'''
-a 		= []
-for i in xrange(n):
-	a.append(F[i][i]/)
+	for j in range(n-1, -1, -1):
+		c[j]	= z[j]-mu[j]*c[j+1]
+		b[j]	= (a[j+1]-a[j])/h[j]-h[j]*(c[j+1]+2*c[j])/3
+		d[j]	= (c[j+1]-c[j])/(3*h[j])
 
-print "The a values:"
-print a
+	#return a, b, c, d
 
-g 		= a[n-1] 
-for i in xrange(n-1, 0, -1):
-	g  *= (t-x[i-1])
-	g  += a[i-1]
+	t	= sp.symbols('t')
+	retorno = []
+	for j in range(n):
+		f = a[j]+b[j]*(t-x[j]) + c[j]*(t-x[j])**2 + d[j]*(t-x[j])**3
+		f = sp.lambdify(t, f, "numpy")
+		retorno.append((x[j], x[j+1], f))
 
-print "The function:"
-print g
-g = sympy.expand(g)
-print "Expanded:"
-print g
+	return aux.Funcao(lambda t: Separavel(retorno, t), "$S(t)$")
 
-g = sympy.lambdify(t, g, "numpy")
-
-print "The correct values:"
-print f(p)
-print "The values calculated by interpolation:"
-print g(p)
-'''
-
+if __name__ == "__main__":
+	inp, img, show = aux.get_all(sys.argv)
+	x, y, f = inp()
+	S = Spline_cubico(x, y)
+	show()
+	img(f, S, x, y)
