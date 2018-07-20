@@ -1,64 +1,146 @@
 # -*- coding: utf-8 -*-
 '''
 		   @file: input.py
-		   @date: 09th March 2018
+		   @date: 
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: This code is to be the inputs of the codes, only for don't repeat the same part of code
-					in all the files
+	@description: 
 
 '''
 
 import sympy as sp
 import numpy as np
 
-'''
+limites = [	[1, 9],\
+			[1, 9],\
+			[1, 9]]
 
-These functions are to the methods:
-* 1-Euler_method
-* 3-Runge_Kutta
 
-'''
-def in1():
-	
-	# The variables
+def get(algorithm, number):
+	if algorithm == 1:
+		return lambda : in1(number)
+	elif algorithm == 2:
+		return lambda ordem: in2(number, ordem)
+	elif algorithm == 3:
+		return lambda : in3(number)
+	elif algorithm == 4:
+		return lambda : in4(number)
+	elif algorithm == 5:
+		return lambda : in5(number)
+	elif algorithm == 6:
+		return lambda : in6(number)
+	elif algorithm == 7:
+		return lambda : in7(number)
+	elif algorithm == 8:
+		return lambda : in8(number)
+	elif algorithm == 9:
+		return lambda : in9(number)
+	elif algorithm == 10:
+		return lambda : in10(number)
+
+def all(number):
 	t		= sp.symbols('t')
-	y 		= sp.symbols('y')
- 
-	# Initial conditions
-	a, b, c	= 0, 2, 0.5									# The interval and initial value
-	n 		= 5 										# The number of segments
-	f 		= y - t**2 + 1								# The function f(t, y)
-	
-	# The begin to start the calculations
-	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
-	return a, b, c, n, f
-
-def in2():
-	# The variables
+	y 		= sp.symbols('y', cls = sp.Function)(t)
+	if number < 5:
+		if number == 1:
+			a, b, c	= 0, 2, 0.5									# The interval and initial value
+			n 		= 10 										# The number of segments
+			f 		= y - t**2 + 1								# The function f(t, y)
+		elif number == 2:
+			a, b, c = 0, 1, -2
+			n 		= 5
+			f 		= y * sp.tan(t) + t - 3
+		elif number == 3:
+			a, b, c	= 0, 2, 0.5									# The interval and initial value
+			n 		= 5 										# The number of segments
+			f 		= y - t										# The function f(t, y)
+		elif number == 4:
+			a, b, c = 1, 2, np.cos(2)*np.sin(10)
+			n 		= 10
+			f 		= 10*y*(sp.cos(10*t)/sp.sin(10*t)) - 2*y**2*sp.sin(2*t)/(sp.sin(10*t)*((sp.cos(2*t))**2))
+	else:
+		if number == 5:
+			a, b, c = 0, 1, 0
+			n 		= 20
+			f 		= t*sp.exp(3*t) - 2*y
+		elif number == 6:
+			a, b, c = 2, 3, 1
+			n 		= 20
+			f 		= 1 + (1-y)**2
+		elif number == 7:
+			a, b, c = 1, 2, 2
+			n 		= 40
+			f 		= 1+y/t
+		elif number == 8:
+			a, b, c = 1, 2, 2
+			n 		= 40
+			f 		= (1+t)/(1+y)
+		elif number == 9:										# A função do Peniel
+			a, b, c	= -5, 5, 0									# The interval and initial value
+			n 		= 20										# The number of segments
+			f 		= sp.exp(- t**2 + 1)						# The function f(t, y)
+			#y 		= (sp.E*sp.sqrt(sp.pi)/2*(sp.erf(t)-sp.erf(-5))	# É alguma coisa com o erf, a funcao exata
+	return a, b, c, n, f, t, y
+def exact(number):
 	t		= sp.symbols('t')
-	y 		= sp.symbols('y')
+	if number == 1:
+		y	= -0.5 * sp.exp(t)+t**2+2*t+1
+	elif number == 2:
+		y	= -3/(sp.cos(t))+t*sp.tan(t)- 3 *sp.tan(t) + 1
+	elif number == 3:
+		y	= -0.5*sp.exp(t)+t+1
+	elif number == 4:
+		y	= sp.cos(2*t)*sp.sin(10*t)
+	y		= sp.lambdify(t, y, "numpy")
+	return y
 
-	# Initial conditions
-	a, b, c	= 0, 2, 0.5									# The interval and initial value
-	n 		= 5 										# The number of segments
-	f 		= y - t + 1									# The function f(t, y)
+
+def in1(number):
+	a, b, c, n, f, t, y = all(number)
+	f 		= sp.lambdify((t, y), f, "numpy")
+	if number < 5:
+		y	= exact(number)
+	else:
+		y	= None
+	return a, b, c, n, f, y
+
+def in2(number, ordem):
+
+	# Mudando o valor de ordem se obtém diferentes ordens para o método de Taylor
+
+	# The variables
+	a, b, c, n, f, t, y = all(number)
+	h 		= (b-a)/n
+	T 		= 0
+
+	termo	= 1
+	df 		= f
+
+	T 	   += termo*df
+	for i in range(2, ordem+1):
+		df = sp.diff(df, t).replace(sp.diff(y, t), f)
+		# 
+		#df = sp.diff(df, t) + sp.diff(df, y)*f  # Para obtermos a derivada
+		termo  *= h/i 							# Para obtermos o fatorial
+		T 	   += termo*df
+		T 		= sp.simplify(T)
+	T 		= sp.lambdify((t, y), T, "numpy")
+
+	if number < 5:
+		y	= exact(number)
+	else:
+		y	= None	
+	return a, b, c, n, T, y
+
+
+def in3(number):
+	return in1(number)
 	
-	# The begin to start the calculations
-	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
-	return a, b, c, n, f
-
+def in4(number):
+	return in1(number)
 '''
-
-These functions are to the methods:
-* 2-Taylor
-
-'''
-
-def in3():
-	'''
-	This function is the Second Taylor
-	'''
-
+def in3(number):
+	#This function is the Second Taylor
+	
 	# The variables
 	t		= sp.symbols('t')
 	y 		= sp.symbols('y')
@@ -77,11 +159,11 @@ def in3():
 	T2 		= sp.lambdify((t, y), T2, "numpy") 			# Transform the function to lambdify
 	
 	return a, b, c, n, T2
+'''
 
-
-def in4():
+def in4(number):
 	'''
-	This function is the Thirth Taylor
+	#This function is the Thirth Taylor
 	'''
 
 	# The variables
@@ -114,7 +196,7 @@ These functions are to:
 
 '''
 
-def in5():
+def in5(number):
 	# The variables
 	t		= sp.symbols('t')
 	y 		= sp.symbols('y')

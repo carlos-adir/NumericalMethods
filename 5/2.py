@@ -1,30 +1,52 @@
 # -*- coding: utf-8 -*-
 '''
-		   @file: 1-Eulers_method.py
-		   @date: 10th March 2018
+		   @file: 1.py
+		   @date: 
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: Para os algoritmos que utilizam os métodos de taylor, além de ter necessariamente
-				  a função f(t, y), é necessário saber também as derivadas de f(t, y) em relação a 
-				  t e em relação a y
+	@description: Metodo de Taylor de ordem maior
 
 '''
 
+import sys
+import aux
 import numpy as np
-import sympy as sp
-import inputs
+
+def Taylor(a, b, c, n, T):
+	# O intervalo [a, b]
+	# Condição inicial y(a) = c
+	# n é o numero de intervalos, obtendo assim n+1 pontos
+	# E f é a função já lambda, tal que y'(t) = f(t)
+	h 		= (b-a)/n 									# The step size
+	t 		= a 										# The frist point that we start
+	
+	w		= np.zeros(n+1)
+	x 		= np.zeros(n+1)
+	Ts 		= np.zeros(n+1) 							# Não é necessário, mas se quisermos fazer a interpolação de Hermite, é possível
+
+	x[0]	= a
+	w[0] 	= c
+	Ts[0]	= T(t, w[0])
+	for i in range(n):
+		w[i+1]		= w[i] + h*Ts[i]
+		t   		= a + h*(i+1)
+		x[i+1] 		= t
+		Ts[i+1]		= T(t, w[i+1])
+	return x, w, Ts
+
 
 if __name__ == "__main__":
-	a, b, c, n, T = inputs.in3() # The principals inputs
-								 # The function is defined like f(t, y, y', y'', ...)
-
-	h = (b-a)/n
-	t = a
-	w = c
-	for i in range(n):
-		w += h*T(t, w)
-		t = a + (i+1)*h
-		print(w)
-
-	print(w)
-
+	inp, img, show = aux.get_all(sys.argv)
+	# Pegando as funcoes base
+	a, b, c, n, T, y = inp(ordem = 4)
+	# Pegando o intervalo [a, b] de interesse
+	# Pegando c, o valor inicial tal que y(a) = c
+	# O valor de n, em que obtemos n intervalos, n+1 pontos
+	# E a função f já lambda, tal q ue y'(t) = f(t)
+	# E a função y exatamente, caso exista
+	x, w, Ts = Taylor(a, b, c, n, T)
+	# Pegamos os valores dos pontos calculados
+	show()
+	# Mostra as informações, caso sejam necessárias
+	img(x, w, Ts, y)
+	# Mostra na tela os pontos calculados, 
 
