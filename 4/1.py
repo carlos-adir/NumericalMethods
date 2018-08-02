@@ -3,23 +3,28 @@
 		   @file: 
    		   @date: 
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: Algoritmo de integração numerica atraves 
 
 '''
 
 import numpy as np
-import sympy as sp
-import inputs
+import aux
+import sys
+
+def Const(a, b, n, f):
+	I = 0
+	h = (b-a)/n
+	x = np.linspace(a, b, n)
+	y = f(x)
+	for i in range(n-1):
+		I += y[i]
+	I *= h
+	return x, y, I
+
 
 if __name__ == "__main__":
-	n, h, f = inputs.in1()	# A ordem é zero
-							# Neste exemplo a, b e t sao inuteis pois so serao
-							# so utilizados os valores de f nos pontos t e o valor de h
-
-	I = 0					# O valor da soma total
-	for i in range(n):
-		I += f[i]
-	I *= h
-
-	print("O valor da integral e: " + str(I))
-
+	inp, img, show = aux.get_all(sys.argv)
+	a, b, n, f = inp()
+	x, y, I = Const(a, b, n, f.e)
+	show(I)
+	img(a, b, n, f, x, y)
