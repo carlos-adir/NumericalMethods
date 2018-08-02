@@ -16,6 +16,12 @@ limites = [	[1, 9],\
 
 
 def get(algorithm, number):
+	limite = limites[algorithm-1]
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
+
 	if algorithm == 1:
 		return lambda : in1(number)
 	elif algorithm == 2:
@@ -80,6 +86,7 @@ def all(number):
 			f 		= sp.exp(- t**2 + 1)						# The function f(t, y)
 			#y 		= (sp.E*sp.sqrt(sp.pi)/2*(sp.erf(t)-sp.erf(-5))	# É alguma coisa com o erf, a funcao exata
 	return a, b, c, n, f, t, y
+
 def exact(number):
 	t		= sp.symbols('t')
 	if number == 1:

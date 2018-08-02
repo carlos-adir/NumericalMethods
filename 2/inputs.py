@@ -20,6 +20,12 @@ limites = [	[1, 3],\
 			[1, 3]]
 
 def get(algorithm, number):
+	limite = limites[algorithm-1]
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
+
 	if algorithm == 1:
 		return lambda : in1(number)
 	elif algorithm == 2:
@@ -32,17 +38,6 @@ def get(algorithm, number):
 		return lambda : in5(number)
 
 def in1(number):
-	'''
-	Esta funcao é apenas para o algoritmo 1.py
-	'''
-	# The variables
-	limite = limites[1-1] # 1 - 1 porque é o primeiro conjunto de dados,	
-						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-	# Initial conditions
 	t		= sp.symbols('t')
 	if number == 1:
 		a, b    = 1, 2							# The interval, it's suppose that a < b
@@ -69,17 +64,6 @@ def in1(number):
 	return a, b, f, tol, nmax
 
 def in2(number):
-	'''
-	Esta funcao é apenas para o algoritmo 2.py
-	'''
-	# The variables
-	limite = limites[2-1] # 1 - 1 porque é o primeiro conjunto de dados,	
-						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-	# Initial conditions
 	t		= sp.symbols('t')
 	if 1 <= number <= 5:
 		p0 		= 1.5 							# The initial aproximation
@@ -117,17 +101,6 @@ def in2(number):
 	return p0, f, g, g_, tol, nmax
 
 def in3(number):
-	'''
-	Esta funcao é apenas para o algoritmo 1.py
-	'''
-	# The variables
-	limite = limites[3-1] # 1 - 1 porque é o primeiro conjunto de dados,	
-						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-	# Initial conditions
 	t		= sp.symbols('t')
 	if number == 1:
 		p0		= 1.5							# The interval, it's suppose that a < b
@@ -160,17 +133,6 @@ def in3(number):
 	return p0, f, f_, tol, nmax
 	
 def in4(number):
-	'''
-	Esta funcao é apenas para o algoritmo 1.py
-	'''
-	# The variables
-	limite = limites[4-1] # 1 - 1 porque é o primeiro conjunto de dados,	
-						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-	# Initial conditions
 	t		= sp.symbols('t')
 	if number == 1:
 		p0, p1	= 1, 2							# The interval, it's suppose that a < b
@@ -197,15 +159,5 @@ def in4(number):
 	return p0, p1, f, tol, nmax
 
 def in5(number):
-	'''
-	Esta funcao é apenas para o algoritmo 1.py
-	'''
-	limite = limites[5-1] # 1 - 1 porque é o primeiro conjunto de dados,	
-						  # mas como nas listas começam em 0, então o primeiro conjutno de dados é 0 
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-	# The variables
 	return in4(number)
 
