@@ -19,6 +19,18 @@ class Funcao(object):
 		self.e = evalu
 		self.l = latex
 		
+def Separavel(sp, x):
+	if type(x) == np.ndarray:
+		n = len(x)
+		y = np.zeros(n)
+		for i in range(n):
+			y[i] = Separavel(sp, x[i])
+		return y
+	else:
+		for j in range(len(sp)):
+			a, b, f = sp[j]
+			if a <= x <= b:
+				return f(x)
 
 def toLaTeX(lat):
 	cdot	= ' \\cdot '

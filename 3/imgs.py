@@ -17,9 +17,9 @@ def get(algorit, number):
 	elif algorit == 6:
 		img = img6
 	elif algorit == 7:
-		img = img7
+		img = lambda f, S, x, y: img7(f, S, x, y, algorit, number)
 	elif algorit == 8:
-		img = img8
+		img = lambda f, S, x, y: img8(f, S, x, y, algorit, number)
 	elif algorit == 9:
 		img = lambda f, S, x, y: img9(f, S, x, y, algorit, number)
 	elif algorit == 10:
@@ -62,6 +62,12 @@ def img1(f, L, x, y, algorit, number):
 	plt.savefig("img/" + str(algorit) + "_" + str(number) + '.png')
 
 	plt.show()
+
+def img7(f, S, x, y, algorit, number):
+	return img9(f, S, x, y, algorit, number)
+
+def img8(f, S, x, y, algorit, number):
+	return img9(f, S, x, y, algorit, number)
 
 def img9(f, S, x, y, algorit, number):
 	# Definindo os intervalos e obtendo os valores das funções
