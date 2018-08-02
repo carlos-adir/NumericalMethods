@@ -2,7 +2,7 @@ import numpy as np
 import sympy as sp
 import aux
 
-limites = [	[0, 8],\
+limites = [	[0, 9],\
 			[0,0],\
 			[0,0],\
 			[0,0],\
@@ -10,7 +10,8 @@ limites = [	[0, 8],\
 			[0,0],\
 			[0,0],\
 			[0,0],\
-			[0, 8]]
+			[0, 9],\
+			[0, 9]]
 
 def get(algorithm, number):
 	if algorithm == 1:
@@ -111,6 +112,9 @@ def in9(number):
 		elif number == 8:
 			f	= sp.cos(5*t)*sp.sin(3*t)
 			x	= np.array((0, 1, 2))
+		elif number == 9:
+			f 	= sp.cos(5*t)*sp.sin(3*t)
+			x   = np.linspace(0, 2, 8)
 		feval	= sp.lambdify(t, f, "numpy") 			# Transform the function to lambdify
 		flatex	= "$f(t) = " + aux.toLaTeX(f)
 		f		= aux.Funcao(feval, flatex)
@@ -119,3 +123,49 @@ def in9(number):
 		x, y = aux.leia_de_arquivo('9.txt')
 		f 	 = None
 	return x, y, f
+
+def in10(number):
+	limite = limites[9-1] # 9 - 1 porque é o nono conjunto de dados,	
+						  # mas como nas listas começam em 0, então o nono conjutno de dados é 8 
+	if number < limite[0]:
+		number = limite[0]
+	if number > limite[1]:
+		number = limite[1]
+	t	= sp.symbols('t')
+	if number == 1:
+		f	= 1/t
+		x	= np.array((2, 2.75, 4))
+	elif number == 2:
+		f	= 1/(t+4) + t
+		x	= np.array((-3, -1.5, 0))
+	elif number == 3:
+		f	= sp.exp(2*t)*sp.cos(3*t)
+		x	= np.array((0, 0.3, 0.6))
+	elif number == 4:
+		f	= sp.cos(t)
+		x	= np.array((0, 0.6, 0.9))
+	elif number == 5:
+		f	= sp.sqrt(1+t)
+		x	= np.array((0, 0.6, 0.9))
+	elif number == 6:
+		f	= sp.exp(t)
+		x	= np.array((0, 0.6, 0.9))
+	elif number == 7:
+		f	= sp.cos(5*t)
+		x	= np.array((0, 1, 2))
+	elif number == 8:
+		f	= sp.cos(5*t)*sp.sin(3*t)
+		x	= np.array((0, 1, 2))
+	elif number == 9:
+		f 	= sp.cos(5*t)*sp.sin(3*t)
+		x   = np.linspace(0, 2, 16)
+
+	f_ 		= sp.diff(f, t)
+	f_ 		= sp.lambdify(t, f_, "numpy")
+	FP		= np.array((f_(x[0]), f_(x[-1])))
+
+	feval	= sp.lambdify(t, f, "numpy") 			# Transform the function to lambdify
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f		= aux.Funcao(feval, flatex)
+	y		= f.e(x)
+	return x, y, f, FP

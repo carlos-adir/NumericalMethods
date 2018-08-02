@@ -1,65 +1,88 @@
+# -*- coding: utf-8 -*-
 '''
-		   @file: 8-Hermite.py
+		   @file: 9.py
    		   @date: 17th September 2017
 		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+	@description: Algoritmo de Spline Cubico
 
 '''
 
+import sys
+import aux
 import numpy as np
 import sympy as sp
-import inputs
 
-#from scipy.special import binom
-#diff = sp.diff
+def Separavel(sp, x):
+	if type(x) == np.ndarray:
+		n = len(x)
+		y = np.zeros(n)
+		for i in range(n):
+			y[i] = Separavel(sp, x[i])
+		return y
+	else:
+		for j in range(len(sp)):
+			a, b, f = sp[j]
+			if a <= x <= b:
+				return f(x)
+
+def Spline_cubico(x, y, FP):
+	# A funcao ja retorna no modo lambdify
+	FPO = FP[0]	# A derivada no primeiro ponto
+	FPN = FP[1] # A derivada no ultimo ponto
+
+	n	= len(x)-1
+	h	= np.zeros(n+1)
+	al	= np.zeros(n+1) # alpha
+	l 	= np.zeros(n+1)
+	mu	= np.zeros(n+1)
+	z	= np.zeros(n+1)
+
+	a 	= y
+	b	= np.zeros(n+1)
+	c	= np.zeros(n+1)
+	d	= np.zeros(n+1)
+
+	for i in range(n):
+		h[i] = x[i+1]-x[i]
+	for i in range(1, n):
+		al[i] = (3/h[i])*(a[i+1]-a[i]) - (3/h[i-1])*(a[i]-a[i-1])
+	al[0]  = 3*((a[1]-a[0])/h[0] - FPO) 
+	al[-1] = 3*(FPN - (a[-1]-a[-2])/h[-2])
+
+	l[0]	= 2*h[0]
+	mu[0]	= 0.5
+	z[0]	= al[0]/l[0]
+
+	for i in range(1, n):
+		l[i]	= 2*(x[i+1]-x[i-1])-h[i-1]*mu[i-1]
+		mu[i]	= h[i]/l[i]
+		z[i]	= (al[i]-h[i-1]*z[i-1])/l[i]
+
+	l[n]	= h[n-1]*(2-mu[n-1])
+	z[n]	= (al[n]-h[n-1]*z[n-1])/l[n]
+	c[n] 	= z[n]
+
+	for j in range(n-1, -1, -1):
+		c[j]	= z[j]-mu[j]*c[j+1]
+		b[j]	= (a[j+1]-a[j])/h[j]-h[j]*(c[j+1]+2*c[j])/3
+		d[j]	= (c[j+1]-c[j])/(3*h[j])
+
+
+
+	#return a, b, c, d
+
+	t	= sp.symbols('t')
+	retorno = []
+	for j in range(n):
+		f = a[j]+b[j]*(t-x[j]) + c[j]*(t-x[j])**2 + d[j]*(t-x[j])**3
+		f = sp.lambdify(t, f, "numpy")
+		retorno.append((x[j], x[j+1], f))
+
+	return aux.Funcao(lambda t: Separavel(retorno, t), "$S(t)$")
 
 if __name__ == "__main__":
-	x, y, p, f = inputs.in1()
-
-
-
-
-	# The variables
-	t	= sp.symbols('t')
-
-	a	= y
-
-	n	= len(x)
-	b	= np.zeros(n)
-	c	= np.zeros(n)
-	d	= np.zeros(n)
-	h	= np.zeros(n-1)
-	for i in range(n-1):
-		h[i] = x[i+1]-x[i]
-
-	k 		= np.zeros(n-1) 			# That means alpha
-	for i in range(1,n-1):
-		k[i] = 3*((a[i+1]-a[i])/h[i] - (a[i]-a[i-1])/h[i-1])
-
-	# To solve the linear system
-	l 		= np.zeros(n)
-	u 		= np.zeros(n)
-	z 		= np.zeros(n)
-	l[0] 	= 1
-	for i in range(1, n-1):
-		l[i] = 2*(x[i+1]-x[i-1]) - h[i-1]*u[i-1]
-		u[i] = h[i]/l[i]
-		z[i] = (k[i] - h[i-1]*z[i-1])/l[i]
-	l[n-1]	= 1
-
-	for i in range(n-2, -1, -1):
-		c[i] = z[i] - u[i]*c[i+1]
-		b[i] = (a[i+1] - a[i])/h[i] - h[i]*(c[i+1]+2*c[i])/3
-		d[i] = (c[i+1] - c[i])/(3*h[i])
-
-
-	print("The functions constants value:")
-	print(a)
-	print(b)
-	print(c)
-	print(d)
-
-	print("The correct values:")
-	print(f(p))
-	print("The values calculated by interpolation:")
-	#print g(p)
+	inp, img, show = aux.get_all(sys.argv)
+	x, y, f, FP = inp()
+	S = Spline_cubico(x, y, FP)
+	show()
+	img(f, S, x, y, FP)

@@ -23,7 +23,7 @@ def get(algorit, number):
 	elif algorit == 9:
 		img = lambda f, S, x, y: img9(f, S, x, y, algorit, number)
 	elif algorit == 10:
-		img = img10
+		img = lambda f, S, x, y, FP: img10(f, S, x, y, FP, algorit, number)
 	
 	return img
 
@@ -64,17 +64,6 @@ def img1(f, L, x, y, algorit, number):
 	plt.show()
 
 def img9(f, S, x, y, algorit, number):
-	'''
-	# Para organizar os termos
-	n = len(x)
-	for i in range(n-1):
-		for j in range(i+1, n):
-			if x[i] > x[j]:
-				x[i], x[j] = x[j], x[i]
-				y[i], y[j] = y[j], y[i]
-	# Mas ja supomos que está ordenado porque o algoritmo de spline requer isso
-	'''
-
 	# Definindo os intervalos e obtendo os valores das funções
 	a, b = x[0], x[-1]
 	X = np.linspace(a - (b-a)/5, b + (b-a)/5, 1024)
@@ -106,3 +95,7 @@ def img9(f, S, x, y, algorit, number):
 	plt.savefig("img/" + str(algorit) + "_" + str(number) + '.png')
 
 	plt.show()
+
+def img10(f, S, x, y, FP, algorit, number):
+	# Definindo os intervalos e obtendo os valores das funções
+	return img9(f, S, x, y, algorit, number)
