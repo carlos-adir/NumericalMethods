@@ -3,7 +3,7 @@ import sympy as sp
 import aux
 
 limites = [	[0, 8],\
-			[0,0],\
+			[0, 8],\
 			[0,0],\
 			[0,0],\
 			[0,0],\
@@ -81,6 +81,19 @@ def in1(number):
 	f		= aux.Funcao(feval, flatex)
 	y		= f.e(x)
 	return x, y, f 	# x e y são arrays, que indicam os pontos
+
+def in2(number):
+	f, t, x = master(number)
+	f_		= sp.diff(f, t)
+	feval	= sp.lambdify(t, f, "numpy") 			# Transform the function to lambdify
+	flatex	= "$f(t) = " + aux.toLaTeX(f)
+	f_eval	= sp.lambdify(t, f_, "numpy") 			# Transform the function to lambdify
+	f_latex	= "$f'(t) = " + aux.toLaTeX(f_)
+	f		= aux.Funcao(feval, flatex)
+	f_		= aux.Funcao(f_eval, f_latex)
+	y		= f.e(x)
+	y_		= f_.e(x)
+	return x, y, y_, f, f_
 
 def in7(number):
 	return in1(number)

@@ -7,7 +7,7 @@ def get(algorit, number):
 	if algorit == 1:
 		img = lambda f, L, x, y: img1(f, L, x, y, algorit, number)
 	elif algorit == 2:
-		img = img2
+		img = lambda f, L, x, y: img1(f, L, x, y, algorit, number)
 	elif algorit == 3:
 		img = img3
 	elif algorit == 4:
@@ -48,13 +48,13 @@ def img1(f, L, x, y, algorit, number):
 	plt.plot(X, YL, label = L.l, c = 'r')
 
 	plt.scatter(x, y, c = 'k', s = 25.)
-	
+
 	# Definindo o range e a grade
 	axes = plt.gca()
 	axes.set_xlim([a - (b-a)/5, b + (b-a)/5])
 	plt.grid(True, which='both')
 
-	plt.legend()
+	#plt.legend()
 	plt.title("Grafico das funções")
 	plt.xlabel('Eixo $t$')
 	plt.ylabel('Eixo $y$')
@@ -62,6 +62,9 @@ def img1(f, L, x, y, algorit, number):
 	plt.savefig("img/" + str(algorit) + "_" + str(number) + '.png')
 
 	plt.show()
+
+def img2(f, L, x, y, algorit, number):
+	return img1(f, L, x, y, algorit, number)
 
 def img7(f, S, x, y, algorit, number):
 	return img9(f, S, x, y, algorit, number)
