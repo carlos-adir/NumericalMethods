@@ -1,93 +1,193 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="architect.css">
+
+	<link rel="stylesheet" href="custom.css">
+
 	<title>Métodos Numéricos</title>
+
 </head>
+
 <body>
+
+
+
 	<header>
+
 		<h1>Métodos Numéricos</h1>
+
 	</header>
 
+
+
 	<nav>
+
+		<a href="index.html">Inicio</a>
+
 		<ol>
+
 			<li><a href="1.html">Encontrar raizes 1D</a>
+
 			<ol>
+
 				<li><a href="1_1.html">Bisecção</a></li>
+
 				<li><a href="1_2.html">Ponto Fixo</a></li>
+
 				<li><a href="1_3.html">Newton</a></li>
+
 				<li><a href="1_4.html">Ponto falso</a></li>
-			</ol>
-			</li>
-			<li><a href="2.html">Interpolação</a>
-			<ol>
-				<li><a href="2_1.html">Lagrange</a></li>
-				<li><a href="2_2.html">Hermite</a></li>
-				<li><a href="2_3.html">Spline</a></li>
-			</ol>
-			</li>
-			<li><a href="3.html">Teoria da Aproximação</a>
-			<ol>
-				<li><a href="3_1.html">Regressão Linear</a></li>
-				<li><a href="3_2.html">Minimos quadráticos</a></li>
-			</ol>
-			</li>
-			<li><a href="4.html">Integração</a>
-			<ol>
-				<li><a href="4_1.html">Trapézios</a></li>
-				<li><a href="4_2.html">Simpson</a></li>
-				<li><a href="4_3.html">Simpson de 3/8</a></li>
 
 			</ol>
+
 			</li>
+
+			<li><a href="2.html">Interpolação</a>
+
+			<ol>
+
+				<li><a href="2_1.html">Lagrange</a></li>
+
+				<li><a href="2_2.html">Hermite</a></li>
+
+				<li><a href="2_3.html">Spline</a></li>
+
+			</ol>
+
+			</li>
+
+			<li><a href="3.html">Teoria da Aproximação</a>
+
+			<ol>
+
+				<li><a href="3_1.html">Regressão Linear</a></li>
+
+				<li><a href="3_2.html">Minimos quadráticos</a></li>
+
+			</ol>
+
+			</li>
+
+			<li><a href="4.html">Integração</a>
+
+			<ol>
+
+				<li><a href="4_1.html">Trapézios</a></li>
+
+				<li><a href="4_2.html">Simpson</a></li>
+
+				<li><a href="4_3.html">Simpson de 3/8</a></li>
+
+
+
+			</ol>
+
+			</li>
+
 			<li><a href="5.html">Resolução de sistemas lineares</a>
+
 			<ol>
+
 				<li><a href="5_1.html">Eliminação de Gauss</a></li>
+
 				<li><a href="5_2.html">Decomposição LU</a></li>
+
 				<li><a href="5_3.html">Iterações de Jacobi</a></li>
+
 				<li><a href="5_4.html">Iterações de Gauss-Seidel</a></li>
+
 			</ol>
+
 			</li>
+
 			<li><a href="6.html">Resolução de EDO's de valor inicial</a>
+
 			<ol>
+
 				<li><a href="6_1.html">Euler</a></li>
+
 				<li><a href="6_2.html">Taylor</a></li>
+
 				<li><a href="6_3.html">Runge Kutta</a></li>
+
 			</ol>
+
 			</li>
+
 			<li><a href="7.html">Resolução de EDO's com contorno</a>
+
 			<ol>
+
 				<li><a href="7_1.html">Shooting linear</a></li>
+
 				<li><a href="7_2.html">Shooting para não linear</a></li>
+
 			</ol>
+
 			</li>
+
 		</ol>
+
 	</nav>
 
 	<main>
+
 		 <article>
-			<h3>Introdução</h3>
+
+			<h2>Introdução</h3>
+
+
 
 			<p>Quando estudamos calculo na universidade, vemos diversos conceitos novos e aplicáveis no dia a dia. Desde aplicações em problemas simples de física até em problemas avançados como mecânica dos fluidos.</p>
+
 			<p>Contudo, fazemos diversas hipóteses para resolver os problemas, tais como considerar que as funções que trabalhamos são funções compostas de funções simples ou assumir que EDOs são de coeficientes constantes e de que EDOs são lineares, o que na maioria das vezes não é verdade. Tais hipóteses frequentemente não são boas para os nossos problemas e abrimos mão de obtermos uma solução analítica(seja porque é dificil, seja porque é impossível) e aceitamos ter valores aproximados.</p>
-			<h6>Para isso serve Calculo Numérico:</h6>
-			<p>Utilizar os conceitos aprendidos em Calculo e aplicar em algoritmos que resolvam e achem soluções para os problemas, mesmo que aproximadas. Devido aos métodos serem aplicáveis no computador, existem erros envolvidos(aproximação numérica e truncamento devido ao hardware) e quanto mais precisão ser necessária, maior o custo computacional.</p>
+
+			<p>Para isso serve Calculo Numérico: Utilizar os conceitos aprendidos em Calculo e aplicar em algoritmos que resolvam e achem soluções para os problemas, mesmo que aproximadas. Devido aos métodos serem aplicáveis no computador, existem erros envolvidos(aproximação numérica e truncamento devido ao hardware) e quanto mais precisão ser necessária, maior o custo computacional.</p>
+
 			<p>Devido à necessidade de aumentar a precisão implicar em aumentar o custo computacional, melhorar os algoritmos para que não aumente tanto o custo computacional é uma boa ideia e devido a isso existe uma grande teoria matemática que envolve o Calculo Numérico. Estudando esses algoritmos e analisando os erros envolvidos é possível escolher o melhor para cada aplicação.</p>
+
 			<p>Os livros de Calculo Numérico normalmente apresentam os algoritmos em pseudocódigos ou em Fortran: uma linguagem pouca utilizada atualmente embora seja muito eficiente para calculo numérico. Por estarmos lidando com algoritmos para fins didáticos, optou-se por uma linguagem de sintaxe simples(Fortran não é simples) e então foi escolhida a linguagem Python em que prioriza a legibilidade do código sobre a velocidade ou expressividade.</p>
+
 			<p>Não é objetivo desse wiki conter toda a teoria de como os algoritmos são constuidos, suas falhas ou como melhorar, pois esse é o objetivo do livro e caso seja isso a sua necessidade, procure um. O livro que explica muitos dos algoritmos aqui presentes será o livro Análise Numérica de Richard L. Burden e J. Douglas Faires. No repositório e dentro de cada pasta contém READMEs que explicam apenas a organização das pastas e informam pouco sobre os algoritmos, pois o necessário de utilização está contido neste wiki.</p>
 
-			<h3>Objetivo</h3>
+
+
+			<h2>Objetivo</h3>
+
+
 
 			<p>Implementar algoritmos de Calculo Numérico em Python e criar tutoriais de como utilizar os algoritmos implementados. Isso somente para fins didáticos.</p>
 
+
+
+			
+
+
+
 		</article>
+
 	</main>
 
+
+
 	<footer>
+
       <p>©Copyright 2050 by nobody. All rights reversed.</p>
+
     </footer>
-	
+
 	
 
+	
+
+
+
 </body>
+
 </html>

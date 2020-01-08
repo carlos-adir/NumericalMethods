@@ -1,0 +1,32 @@
+nav
+{
+	float: left;
+	width: 20%;
+	margin-top: 2em;
+	margin-left: 2%;
+	margin-right: 3%
+}
+main
+{
+	width: 70%;
+	float: left;
+}
+article
+{
+	float: left;
+	margin-left: 3%;
+	margin-right: 2%
+}
+
+footer
+{
+	clear: left;
+}
+
+header h1
+{
+	
+	text-align: center;
+	margin: 0 auto 0 auto;
+}
+
