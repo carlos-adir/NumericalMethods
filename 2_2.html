@@ -1,207 +1,127 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 	<meta charset="utf-8">
-
 	<link rel="stylesheet" href="architect.css">
-
 	<link rel="stylesheet" href="custom.css">
-
-	<title>MetNum - Hermite</title>
-
 	<script id="MathJax-script" async
-
-		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-
+	src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 	</script>
-
+	<title>MetNum - Hermite</title>
 </head>
-
 <body>
-
 	<header>
-
 		<h1>Métodos Numéricos</h1>
-
 	</header>
 
-
-
 	<nav>
-
 		
-
 		<a href="index.html">Inicio</a>
-
 		<ol>
-
 			<li><a href="1.html">Encontrar raizes 1D</a>
-
 			<ol>
-
 				<li><a href="1_1.html">Bisecção</a></li>
-
 				<li><a href="1_2.html">Ponto Fixo</a></li>
-
 				<li><a href="1_3.html">Newton</a></li>
-
-				<li><a href="1_4.html">Ponto falso</a></li>
-
+				<li><a href="1_4.html">Secantes</a></li>
 			</ol>
-
 			</li>
-
 			<li><a href="2.html">Interpolação</a>
-
 			<ol>
-
 				<li><a href="2_1.html">Lagrange</a></li>
-
 				<li><a href="2_2.html">Hermite</a></li>
-
 				<li><a href="2_3.html">Spline</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="3.html">Teoria da Aproximação</a>
-
 			<ol>
-
 				<li><a href="3_1.html">Regressão Linear</a></li>
-
 				<li><a href="3_2.html">Minimos quadráticos</a></li>
-
 			</ol>
-
 			</li>
-
-			<li><a href="4.html">Integração</a>
-
+			<li><a href="4.html">Integração Numérica</a>
 			<ol>
-
-				<li><a href="4_1.html">Trapézios</a></li>
-
-				<li><a href="4_2.html">Simpson</a></li>
-
-				<li><a href="4_3.html">Simpson de 3/8</a></li>
-
+				<li><a href="4_1.html">Retângulos</a></li>
+				<li><a href="4_2.html">Trapézios</a></li>
+				<li><a href="4_3.html">Simpson de 1/3</a></li>
+				<li><a href="4_4.html">Simpson de 3/8</a></li>
 		
-
 			</ol>
-
 			</li>
-
 			<li><a href="5.html">Resolução de sistemas lineares</a>
-
 			<ol>
-
 				<li><a href="5_1.html">Eliminação de Gauss</a></li>
-
 				<li><a href="5_2.html">Decomposição LU</a></li>
-
 				<li><a href="5_3.html">Iterações de Jacobi</a></li>
-
 				<li><a href="5_4.html">Iterações de Gauss-Seidel</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="6.html">Resolução de EDO's de valor inicial</a>
-
 			<ol>
-
 				<li><a href="6_1.html">Euler</a></li>
-
 				<li><a href="6_2.html">Taylor</a></li>
-
 				<li><a href="6_3.html">Runge Kutta</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="7.html">Resolução de EDO's com contorno</a>
-
 			<ol>
-
 				<li><a href="7_1.html">Shooting linear</a></li>
-
 				<li><a href="7_2.html">Shooting para não linear</a></li>
-
 			</ol>
-
 			</li>
-
 		</ol>
 	</nav>
-
 	<main>
-
 		 <article>
-
-
 
 			<h2>Interpolação de Hermite</h2>
 
+			<h3 class="resumo">Resumo</h3>
+			<div class="subsec">
+				<p>Esse método consiste em pegar \(n+1\) pontos de forma \(\left(x_i, \ y_i, \ d_i\right)\), e interpolar por um polinômio \(f(x)\) tal que:</p>
+				
+				$$f(x_i) = y_i$$
+				$$f'(x_i) = d_i$$ 
+			</div>
+			
+			<h3 class="teoria">Teoria</h3>
+			<div class="subsec">
+				<p>Esse método pega a ideia de <a href="">Interpolação de Lagrange</a> e adiciona derivadas.</p>
+			</div>
+			
+			<h3 class="erros empty">Análise de Erros</h3>
+			<div class="subsec">
+			</div>
+			
+			<h3 class="restricoes empty">Restrições</h3>
+			<div class="subsec">
+			</div>
+			
+			<h3 class="parametros">Parâmetros</h3>
+			<div class="subsec">
+				<ul>
+					<li>Os valores dos \(n+1\) pontos: \(\left(x_i, \ y_i, \ d_i\right)\)</li>
+				</ul>
+			</div>
+			
+			<h3 class="exemplo empty">Exemplos</h3>
+			<div class="subsec">
+			</div>
+			
+			<h3 class="more empty">Creditos e saiba mais</h3>
+			<div class="subsec">
+			</div>
 
 
-			<h3>Resumo</h3>
-
-
-
-			<h3>Teoria</h3>
-
-
-
-			<h3>Análise de Erros</h3>
-
-
-
-			<h3>Restrições</h3>
-
-
-
-			<h3>Parâmetros</h3>
 
 			
-
-			<h3>Exemplos</h3>
-
-
-
-			<h3>Creditos e saiba mais</h3>
-
-
-
-
-
-
-
-			
-
 		</article>
-
 	</main>
 
-
-
 	<footer>
-
-      <p>©Copyright 2020 by CarlosAdir. All rights reserved.</p>
-
+		<p>©Copyright 2020 by CarlosAdir. All rights reserved.</p>
     </footer>
 
 
-
-
-
 </body>
-
 </html>
-

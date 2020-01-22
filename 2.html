@@ -1,178 +1,128 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 	<meta charset="utf-8">
-
 	<link rel="stylesheet" href="architect.css">
-
 	<link rel="stylesheet" href="custom.css">
-
-	<title>MetNum - Interpolação</title>
-
 	<script id="MathJax-script" async
-
-		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-
+	src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 	</script>
-
+	<title>MetNum - Interpolação</title>
 </head>
-
 <body>
-
 	<header>
-
 		<h1>Métodos Numéricos</h1>
-
 	</header>
 
-
-
 	<nav>
-
 		
-
 		<a href="index.html">Inicio</a>
-
 		<ol>
-
 			<li><a href="1.html">Encontrar raizes 1D</a>
-
 			<ol>
-
 				<li><a href="1_1.html">Bisecção</a></li>
-
 				<li><a href="1_2.html">Ponto Fixo</a></li>
-
 				<li><a href="1_3.html">Newton</a></li>
-
-				<li><a href="1_4.html">Ponto falso</a></li>
-
+				<li><a href="1_4.html">Secantes</a></li>
 			</ol>
-
 			</li>
-
 			<li><a href="2.html">Interpolação</a>
-
 			<ol>
-
 				<li><a href="2_1.html">Lagrange</a></li>
-
 				<li><a href="2_2.html">Hermite</a></li>
-
 				<li><a href="2_3.html">Spline</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="3.html">Teoria da Aproximação</a>
-
 			<ol>
-
 				<li><a href="3_1.html">Regressão Linear</a></li>
-
 				<li><a href="3_2.html">Minimos quadráticos</a></li>
-
 			</ol>
-
 			</li>
-
-			<li><a href="4.html">Integração</a>
-
+			<li><a href="4.html">Integração Numérica</a>
 			<ol>
-
-				<li><a href="4_1.html">Trapézios</a></li>
-
-				<li><a href="4_2.html">Simpson</a></li>
-
-				<li><a href="4_3.html">Simpson de 3/8</a></li>
-
+				<li><a href="4_1.html">Retângulos</a></li>
+				<li><a href="4_2.html">Trapézios</a></li>
+				<li><a href="4_3.html">Simpson de 1/3</a></li>
+				<li><a href="4_4.html">Simpson de 3/8</a></li>
 		
-
 			</ol>
-
 			</li>
-
 			<li><a href="5.html">Resolução de sistemas lineares</a>
-
 			<ol>
-
 				<li><a href="5_1.html">Eliminação de Gauss</a></li>
-
 				<li><a href="5_2.html">Decomposição LU</a></li>
-
 				<li><a href="5_3.html">Iterações de Jacobi</a></li>
-
 				<li><a href="5_4.html">Iterações de Gauss-Seidel</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="6.html">Resolução de EDO's de valor inicial</a>
-
 			<ol>
-
 				<li><a href="6_1.html">Euler</a></li>
-
 				<li><a href="6_2.html">Taylor</a></li>
-
 				<li><a href="6_3.html">Runge Kutta</a></li>
-
 			</ol>
-
 			</li>
-
 			<li><a href="7.html">Resolução de EDO's com contorno</a>
-
 			<ol>
-
 				<li><a href="7_1.html">Shooting linear</a></li>
-
 				<li><a href="7_2.html">Shooting para não linear</a></li>
-
 			</ol>
-
 			</li>
-
 		</ol>
 	</nav>
-
 	<main>
-
 		 <article>
-
 		 	
-
 			<h2>Interpolação de pontos e funções</h2>
 
-
-
+			<p>A interpolação parte de que, dado um conjunto de pontos, como podemos calcular um valor intermediário entre eles?.</p>
 			
+			<p>Tudo se resume em que temos uma quantidade limitada de dados e queremos usa-los para descobrir valores entre os pontos.</p>
 
+			<p><em>Interpolação</em> se difere justamente de <em>Extrapolação</em> porque a interpolação calcula valores <b>entre</b> os dados já conhecidos, enquanto que a extrapolação calcula valores <b>além</b> dos dados conhecidos.
 
+			<h4>Exemplo</h4>
+			<div class="subsec">
+				<p>Medimos diversos valores de temperatura em relação ao tempo. Sabemos então</p>
 
+				<ul>
+					<li> No tempo \(t=0 \ \mathrm{s}\) era de \(90 \ \mathrm{^oC}\)</li>
+					<li> No tempo \(t=1 \ \mathrm{s}\) era de \(70 \ \mathrm{^oC}\)</li>
+				</ul>
+				<p>Como podemos calcular a temperatura quando \(t=0.5 \ \mathrm{s}\) ?</p>
+			</div>
+
+			<p>Outro objetivo é simplificar o calculo de algumas funções.<p>
+
+			<h4>Exemplo</h4>
+			<div class="subsec">
+				Poderiamos calcular o seno através da série de Taylor:</p>
+
+				$$sin \ x = x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - \cdots$$
+
+				<p>Computacionalmente vale mais a pena calcular alguns pontos padrões, tais como</p>
+
+				<ul>
+					<li>\(x = \ 0^o\)</li>
+					<li>\(x = \ 30^o\)</li>
+					<li>\(x = \ 45^o\)</li>
+					<li>\(x = \ 60^o\)</li>
+					<li>\(x = \ 90^o\)</li>
+				</ul>
+
+				<p>E então calcular o \(sin \ 35^o\) por interpolação pode ser mais vantajoso que calcular pela expansão de série</p>
+			</div>
+
+			<p>E para fazermos isso, existem diferentes métodos</p>
 			
-
 		</article>
-
 	</main>
 
-
-
 	<footer>
-
-      <p>©Copyright 2050 by nobody. All rights reversed.</p>
-
+		<p>©Copyright 2020 by CarlosAdir. All rights reserved.</p>
     </footer>
 
 
-
-
-
 </body>
-
 </html>
