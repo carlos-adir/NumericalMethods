@@ -11,7 +11,7 @@
 '''
 
 import sys
-import aux
+import auxiliar
 
 def PosicaoFalsa(p0, p1, f, tol, nmax):
 	# Os calculos

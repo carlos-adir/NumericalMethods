@@ -12,7 +12,7 @@
 '''
 
 import sys
-import aux
+import auxiliar
 
 def Newton(p0, f, f_, tol, nmax):
 	# Os calculos

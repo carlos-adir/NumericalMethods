@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sp
-import aux
+import auxiliar
 
 limites = [	[0, 8],\
 			[0, 8],\

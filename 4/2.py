@@ -7,7 +7,7 @@
 
 '''
 
-import aux
+import auxiliar
 import sys
 import numpy as np
 

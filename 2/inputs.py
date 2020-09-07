@@ -10,7 +10,7 @@
 
 import sympy as sp
 import numpy as np
-import aux
+import auxiliar
 
 
 limites = [	[1, 3],\

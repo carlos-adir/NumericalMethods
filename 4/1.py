@@ -8,7 +8,7 @@
 '''
 
 import numpy as np
-import aux
+import auxiliar
 import sys
 
 def Const(a, b, n, f):

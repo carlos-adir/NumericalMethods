@@ -10,7 +10,7 @@
 '''
 
 import sys
-import aux
+import auxiliar
 
 
 def FixedPoint(p0, g, g_, tol, nmax): # Este algoritmo não é muito robusto, caso g' fique 1 ou maior, ele diverge

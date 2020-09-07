@@ -9,7 +9,7 @@
 
 import sys
 import sympy as sp
-import aux
+import auxiliar
 import numpy as np
 
 def Hermite(x, y, y_):

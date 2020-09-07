@@ -9,7 +9,7 @@
 
 import sys
 import sympy as sp
-import aux
+import auxiliar
 
 def Lagrange(x, y):
 	# The variables

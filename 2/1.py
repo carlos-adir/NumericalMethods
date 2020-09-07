@@ -15,7 +15,7 @@
 '''
 
 import sys
-import aux
+import auxiliar
 
 def Bissection(a, b, f, tol, nmax):
 	# Os calculos
