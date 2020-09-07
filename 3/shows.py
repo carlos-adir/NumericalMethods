@@ -35,8 +35,8 @@ def get(algorithm, number):
 def show1(L):
 	pass
 
-def show2():
-	pass
+def show2(L):
+	print(L.e)
 
 def show3():
 	pass
