@@ -9,6 +9,7 @@
 
 import sympy as sp
 import numpy as np
+from types_lib import Function
 
 limites = [	[1, 9],\
 			[1, 9],\
@@ -25,7 +26,7 @@ def get(algorithm, number):
 	if algorithm == 1:
 		return lambda : in1(number)
 	elif algorithm == 2:
-		return lambda ordem: in2(number, ordem)
+		return lambda : in2(number)
 	elif algorithm == 3:
 		return lambda : in3(number)
 	elif algorithm == 4:
@@ -85,7 +86,8 @@ def all(number):
 			n 		= 20										# The number of segments
 			f 		= sp.exp(- t**2 + 1)						# The function f(t, y)
 			#y 		= (sp.E*sp.sqrt(sp.pi)/2*(sp.erf(t)-sp.erf(-5))	# É alguma coisa com o erf, a funcao exata
-	return a, b, c, n, f, t, y
+	f = Function((t, y), f)
+	return a, b, c, n, f
 
 def exact(number):
 	t		= sp.symbols('t')
@@ -97,46 +99,31 @@ def exact(number):
 		y	= -0.5*sp.exp(t)+t+1
 	elif number == 4:
 		y	= sp.cos(2*t)*sp.sin(10*t)
-	y		= sp.lambdify(t, y, "numpy")
+	y 		= Function(t, y)
 	return y
 
 
 def in1(number):
-	a, b, c, n, f, t, y = all(number)
-	f 		= sp.lambdify((t, y), f, "numpy")
+	a, b, c, n, f = all(number)
 	if number < 5:
 		y	= exact(number)
 	else:
 		y	= None
 	return a, b, c, n, f, y
 
-def in2(number, ordem):
+def in2(number):
 
 	# Mudando o valor de ordem se obtém diferentes ordens para o método de Taylor
 
 	# The variables
-	a, b, c, n, f, t, y = all(number)
-	h 		= (b-a)/n
-	T 		= 0
-
-	termo	= 1
-	df 		= f
-
-	T 	   += termo*df
-	for i in range(2, ordem+1):
-		df = sp.diff(df, t).replace(sp.diff(y, t), f)
-		# 
-		#df = sp.diff(df, t) + sp.diff(df, y)*f  # Para obtermos a derivada
-		termo  *= h/i 							# Para obtermos o fatorial
-		T 	   += termo*df
-		T 		= sp.simplify(T)
-	T 		= sp.lambdify((t, y), T, "numpy")
+	a, b, c, n, f = all(number)
+	
 
 	if number < 5:
 		y	= exact(number)
 	else:
 		y	= None	
-	return a, b, c, n, T, y
+	return a, b, c, n, f, y
 
 
 def in3(number):

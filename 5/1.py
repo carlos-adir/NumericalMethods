@@ -8,30 +8,11 @@
 '''
 
 import sys
-import aux
-import numpy as np
+import auxiliar
 
-def Euler(a, b, c, n, f):
-	# O intervalo [a, b]
-	# Condição inicial y(a) = c
-	# n é o numero de intervalos, obtendo assim n+1 pontos
-	# E f é a função já lambda, tal que y'(t) = f(t)
-	h 		= (b-a)/n 									# The step size
-	t 		= a 										# The frist point that we start
-	
-	w		= np.zeros(n+1)
-	x 		= np.zeros(n+1)
-	fs 		= np.zeros(n+1) 							# Não é necessário, mas se quisermos fazer a interpolação de Hermite, é possível
+from methodes import Euler
 
-	x[0]	= a
-	w[0] 	= c
-	fs[0]	= f(t, w[0])
-	for i in range(n):
-		w[i+1]		= w[i] + h*fs[i]
-		t   		= a + h*(i+1)
-		x[i+1] 		= t
-		fs[i+1]		= f(t, w[i+1])
-	return x, w, fs
+
 
 
 if __name__ == "__main__":
