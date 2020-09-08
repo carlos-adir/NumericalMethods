@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- #############################################
+	     #                    CSS                    #
+	     ############################################# -->
+	
+	
+	<!-- Bootstrap CSS CDN -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+	<!-- <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"> -->
+	
+	<link rel="stylesheet" href="../css/sidebar.css">
+	<link rel="stylesheet" href="../css/architect.css">
+	<link rel="stylesheet" href="../css/0custom.css">
+	
+	
+	
+	<!-- #############################################
+	     #                    JS                     #
+	     ############################################# -->
+	
+	<!-- <script id="MathJax-script" async src="../js/tex-mml-chtml.js"></script> -->
+	<!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML"></script> -->
+	<!-- <script type="text/x-mathjax-config" src="../js/mathjaxconfig.js"></script> -->
+	
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+	<title>
+	MetNum - Integração
+	</title>
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3>Métodos Numéricos</h3>
+			</div>
+		
+		    <ul class="list-unstyled components">
+		        <li>
+		            <a href="index.html">Inicio</a>
+		        </li>
+		        <li><a href="#raizes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Encontrar raizes 1D</a>
+		            <ul class="collapse list-unstyled" id="raizes">
+		                <li><a href="1.html">Introdução</a></li>
+		                <li><a href="1_1.html">Bisecção</a></li>
+		                <li><a href="1_2.html">Ponto Fixo</a></li>
+		                <li><a href="1_3.html">Newton</a></li>
+		                <li><a href="1_4.html">Secantes</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#interpolacao" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Interpolação</a>
+		            <ul class="collapse list-unstyled" id="interpolacao">
+		                <li><a href="2.html">Introdução</a></li>
+		                <li><a href="2_1.html">Lagrange</a></li>
+		                <li><a href="2_2.html">Hermite</a></li>
+		                <li><a href="2_3.html">Spline</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#aproximacao" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Teoria da Aproximação</a>
+		            <ul class="collapse list-unstyled" id="aproximacao">
+		                <li><a href="3.html">Introdução</a></li>
+		                <li><a href="3_1.html">Regressão Linear</a></li>
+		                <li><a href="3_2.html">Minimos quadráticos</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#integracao" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Integração Numérica</a>
+		            <ul class="collapse list-unstyled" id="integracao">
+		                <li><a href="4.html">Introdução</a></li>
+		                <li><a href="4_1.html">Retângulos</a></li>
+		                <li><a href="4_2.html">Trapézios</a></li>
+		                <li><a href="4_3.html">Simpson de 1/3</a></li>
+		                <li><a href="4_4.html">Simpson de 3/8</a></li>
+		            </ul>
+		        </li>
+		        <!-- <li><a href="#sistemas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sistemas lineares</a>
+		            <ul class="collapse list-unstyled" id="sistemas">
+		                <li><a href="5.html">Introdução</a></li>
+		                <li><a href="5_1.html">Eliminação de Gauss</a></li>
+		                <li><a href="5_2.html">Decomposição LU</a></li>
+		                <li><a href="5_3.html">Iterações de Jacobi</a></li>
+		                <li><a href="5_4.html">Iterações de Gauss-Seidel</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#edovi" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">EDO's de valor inicial</a>
+		            <ul class="collapse list-unstyled" id="edovi">
+		                <li><a href="6.html">Introdução</a></li>
+		                <li><a href="6_1.html">Euler</a></li>
+		                <li><a href="6_2.html">Taylor</a></li>
+		                <li><a href="6_3.html">Runge Kutta</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#edocc" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">EDO's com contorno</a>
+		            <ul class="collapse list-unstyled" id="edocc">
+		                <li><a href="7.html">Introdução</a></li>
+		                <li><a href="7_1.html">Shooting linear</a></li>
+		                <li><a href="7_2.html">Shooting para não linear</a></li>
+		            </ul>
+		        </li> -->
+		    </ul>
+		</nav>
+		
+		<div id="content">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light" id="margintop25">
+				<div class="container-fluid" id="padding0">
+					<h1>
+						Integração Numérica
+					</h1>
+					<button type="button" id="sidebarCollapse" data-icon="align-justify" class="btn btn-primary">
+						<i class="fas fa-align-right"></i>
+						<span>Toggle Sidebar</span>
+					</button>
+				</div>
+			</nav>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light" id="padding0">
+				<div class="container-fluid">
+					<div class="moving">
+						<a href="index.html" class="badge badge-primary">Index</a>
+						>>
+						<span class="badge badge-secondary">Integração</span>
+					</div>
+				</div>
+			</nav>
+			<article>
+		 		<p>Assim como os outros métodos, às vezes é necessário calcular a derivada ou a integral de uma função.
+		 		Fazer analiticamente pode ter um custo muito alto, isso quando é possível calcular a derivada ou integral analitica, pois existem diversas funções que não são possíveis integrar analiticamente.
+		 		Por exemplo, a integral elíptica dada por:</p>
+		 		
+		 		$$I = \int_{0}^{1} \sqrt{1+\cos^2 x} \ dx$$
+		 		
+		 		<p>Por isso, são desenvolvidos métodos de integração numérica, em que, assim como os outros métodos numéricos, descartamos a solução exata em troca de uma solução aproximada.</p>
+		 		
+		 		<p>Este wiki serve para exemplificar os algoritmos de integração numérica, pois a demonstração das equações, análise de erros e outras coisas fogem do escopo. Nesta intenção, procure um livro texto.</p>
+		 		
+		 		<a href="https://pt.wikipedia.org/w/index.php?title=Integra%C3%A7%C3%A3o_num%C3%A9rica&oldid=52678851">Wikipédia - Integração Numérica</a>
+			</article>
+			<footer>
+				<p>©Copyright 2020 by CarlosAdir. All rights reserved.</p>
+			</footer>
+		</div>
+	</div>
+	
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<!-- <script src="../js/jquery-3.3.1.slim.min.js"></script> -->
+	
+	<!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<!-- <script src="../js/popper.min.js"></script> -->
+	
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<!-- <script src="../js/bootstrap.min.js"></script> -->
+	
+	<!-- jQuery Custom Scroller CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script> -->
+	<script type="text/javascript" src="../js/init1.js"></script>
+</body>
+</html>
