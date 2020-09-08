@@ -1,0 +1,29 @@
+<head>
+	<meta charset="utf-8">
+	<!--#include "html_aux/_3config_css.html"-->
+	<!--#include "html_aux/_3config_js.html"-->
+	<script src="<<js_folder>>/<<substituir>>_interface.js"></script>
+	<script src="<<js_folder>>/<<substituir>>_algorithm.js"></script>
+</head>
+
+<body onload="checkFileAPI();">
+	<!--#include "<<base_files_folder>>/<<substituir>>/header.html"-->
+	<div id="totalbox" draggable="true">
+		<div id="mainbox" class="container row">
+	        <div id="visualize" class="col-xs-6 radio-toolbar">
+				<!--#include "html_aux/_3visualize.html"-->
+			</div>
+			<div id="input" class="col-xs-6">
+				<!--#include "html_aux/_3input.html"-->
+			</div>
+			<div id="trade" class="col-xs-12">
+				<!--#include "html_aux/_3trade.html"-->
+			</div>
+		</div>
+		<div id="dragdropbox">
+			<!--#include "html_aux/_3dragdrop.html"-->
+		</div>
+	</div>
+	<!--#include "html_aux/_3scripts.html"-->
+	<script src="<<js_folder>>/<<substituir>>_code_init.js"></script>
+</body>

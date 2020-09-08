@@ -1,0 +1,17 @@
+<div class="btn-group btn-group-toggle" data-toggle="buttons" style="width:100%;">
+	<label for="buttongraph" class="btn switchbutton col-xs-6" onclick="click_buttonGraph();" style="width: 50%;"> <input id="buttongraph" type="radio" name="option" checked >
+	GRÁFICO</label>
+	<label for="buttonlog" class="btn switchbutton col-xs-6" onclick="click_buttonLog();" style="width: 50%;">
+		<input id="buttonlog" type="radio" name="option" > 
+	REGISTRO</label>
+</div>
+
+<div id="showing">
+	<div id="divgraph"></div>
+	
+	<div id="divlog" style="display: none">
+		<div id="scroll" class="scrollable">
+			<table style="width: 100%;"><tbody id="log"></tbody></table>
+		</div>
+	</div>
+</div>
