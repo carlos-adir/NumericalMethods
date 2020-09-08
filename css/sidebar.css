@@ -2,7 +2,6 @@
     DEMO STYLE
 */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 a,
 a:hover,
@@ -48,8 +47,6 @@ a:focus {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #2e7bcf;
-    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-    /*font-size: 42pt;*/
     text-align: center;
 }
 
