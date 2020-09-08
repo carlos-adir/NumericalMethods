@@ -1,0 +1,39 @@
+<p>A interpolação parte de que, dado um conjunto de pontos, como podemos calcular um valor intermediário entre eles?.</p>
+
+<p>Tudo se resume em que temos uma quantidade limitada de dados e queremos usa-los para descobrir valores entre os pontos.</p>
+
+<p><em>Interpolação</em> se difere justamente de <em>Extrapolação</em> porque a interpolação calcula valores <b>entre</b> os dados já conhecidos, enquanto que a extrapolação calcula valores <b>além</b> dos dados conhecidos.
+
+<h4>Exemplo</h4>
+<div class="subsec">
+	<p>Medimos diversos valores de temperatura em relação ao tempo. Sabemos então</p>
+
+	<ul>
+		<li> No tempo \(t=0 \ \mathrm{s}\) era de \(90 \ \mathrm{^oC}\)</li>
+		<li> No tempo \(t=1 \ \mathrm{s}\) era de \(70 \ \mathrm{^oC}\)</li>
+	</ul>
+	<p>Como podemos calcular a temperatura quando \(t=0.5 \ \mathrm{s}\) ?</p>
+</div>
+
+<p>Outro objetivo é simplificar o calculo de algumas funções.<p>
+
+<h4>Exemplo</h4>
+<div class="subsec">
+	Poderiamos calcular o seno através da série de Taylor:</p>
+
+	$$sin \ x = x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - \cdots$$
+
+	<p>Computacionalmente vale mais a pena calcular alguns pontos padrões, tais como</p>
+
+	<ul>
+		<li>\(x = \ 0^o\)</li>
+		<li>\(x = \ 30^o\)</li>
+		<li>\(x = \ 45^o\)</li>
+		<li>\(x = \ 60^o\)</li>
+		<li>\(x = \ 90^o\)</li>
+	</ul>
+
+	<p>E então calcular o \(sin \ 35^o\) por interpolação pode ser mais vantajoso que calcular pela expansão de série</p>
+</div>
+
+<p>E para fazermos isso, existem diferentes métodos</p>

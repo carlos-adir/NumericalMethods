@@ -1,0 +1,48 @@
+<p>Nós temos \(n\) pontos dados, com coordenadas \((x_1, \ y_1), \ \cdots, \ (x_n, \ y_n)\).</p>
+
+<p>E temos uma reta com coeficientes \(a\) e \(b\) ainda desconhecidos:
+
+$$r: \ y = ax + b$$
+
+<p>Daí calculamos a soma dos quadrados das distâncias verticais até a reta:</p>
+
+$$S(a, \ b) = \sum_{i=1}^{n} \left(ax_i + b - y_i\right)^2$$
+
+<p>E então, queremos minizar o valor de \(S\)(usando o método dos mínimos quadráticos), e para isso, derivamos parcialmente e igualamos à zero:</p>
+
+$$\begin{align*}
+	\dfrac{\partial S}{\partial a} = 0 \Leftrightarrow & \sum_{i=1}^{n}2x_i\left(ax_i + b - y_i\right) = 0 \\
+	\dfrac{\partial S}{\partial b} = 0 \Leftrightarrow & \sum_{i=1}^{n}2\left(ax_i + b - y_i\right) = 0
+\end{align*}$$
+
+<p>Reorganizando nós  temos um sistema</p>
+
+$$\begin{align*}
+\begin{cases}
+a\sum x_i^2 + b\sum x_i = \sum x_i y_i \\
+a\sum x_i   + b \cdot n = \sum y_i
+\end{cases}
+\end{align*}$$
+
+<p>E na forma matricial</p>
+
+$$\begin{bmatrix}
+\sum x_i^2 & \sum x_i \\
+\sum x_i   &  n
+\end{bmatrix}\cdot \begin{bmatrix}
+a \\ b
+\end{bmatrix} = \begin{bmatrix}
+\sum x_i y_i \\ \sum y_i
+\end{bmatrix}$$
+
+<p>Que obtemos como solução:</p>
+
+$$m = n\sum x_i^2 - \left(\sum x_i\right)^2$$
+$$a = \dfrac{n \sum x_i y_i - \sum x_i \sum y_i}{m}$$
+$$b = \dfrac{\sum y_i \sum x_i^2 - \sum x_i \sum x_i y_i}{m}$$			
+
+<p>Podemos ver pela <a href="https://pt.wikipedia.org/w/index.php?title=Desigualdade_das_m%C3%A9dias&oldid=45503333">desigualdade das médias</a>, o valor de \(m\) é sempre positivo pois:</p>
+
+$$\sqrt{\dfrac{x_1^2 + \cdots + x_n^2}{n}} \ge \dfrac{x_1 + \cdots + x_n}{n}$$
+
+<p>Ocorrendo a igualdade se e somente se \(x_0 = x_1 = \cdots = x_n\)</p>
