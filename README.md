@@ -1,47 +1,50 @@
-# Metodos Numéricos
 
-## Introdução
+## Objective
 
-Quando estudamos calculo na universidade, vemos diversos conceitos novos e aplicáveis no dia a dia. Desde aplicações em problemas simples de física até em problemas avançados como mecânica dos fluidos.
+This repository is to storage and show some resolutions' exemples using computational algorithms in python. The problems are in the field:
 
-Contudo, fazemos diversas hipóteses para resolver os problemas, tais como considerar que as funções que trabalhamos são funções compostas de funções simples ou assumir que EDOs são de coeficientes constantes e de que EDOs são lineares, o que na maioria das vezes não é verdade. Tais hipóteses frequentemente não são boas para os nossos problemas e abrimos mão de obtermos uma solução analítica(seja porque é dificil, seja porque é impossível) e aceitamos ter valores aproximados.
+1. Find root of one variable function
+2. Interpolate points
+3. Numerical integration
+4. Solving Ordinary differential equation
+5. Solve solution of linear systems
 
-Para isso serve Calculo Numérico: Utilizar os conceitos aprendidos em Calculo e aplicar em algoritmos que resolvam e achem soluções para os problemas, mesmo que aproximadas. Devido aos métodos serem aplicáveis no computador, existem erros envolvidos(aproximação numérica e truncamento devido ao hardware) e quanto mais precisão ser necessária, maior o custo computacional.
 
-Devido à necessidade de aumentar a precisão implicar em aumentar o custo computacional, melhorar os algoritmos para que não aumente tanto o custo computacional é uma boa ideia e devido a isso existe uma grande teoria matemática que envolve o Calculo Numérico. Estudando esses algoritmos e analisando os erros envolvidos é possível escolher o melhor para cada aplicação.
+These algorithms are not optimased, since the objective is for educational purposes. Some of these algoritms are found in well documented and devoloped library, for exemple, the function ```solve``` in the ```numpy.linalg``` module that solves linear system.
 
-Os livros de Calculo Numérico normalmente apresentam os algoritmos em pseudocódigos ou em [Fortran](https://pt.wikipedia.org/wiki/Fortran): uma linguagem pouca utilizada atualmente embora seja muito eficiente para calculo numérico. Por estarmos lidando com algoritmos para fins didáticos, optou-se por uma linguagem de sintaxe simples(Fortran não é simples) e então foi escolhida a linguagem [Python](https://pt.wikipedia.org/wiki/Python) em que prioriza a legibilidade do código sobre a velocidade ou expressividade.
+## Documentation
 
-Visite o [wiki](https://github.com/CarlosAdir/Metodos-Numericos/wiki), pois nele estão contidos os textos para entendimento. Os outros READMEs dentro de cada pasta explicam apenas a organização das pastas e informam pouco sobre os algoritmos.
+To access our documentation and understand about the methods, [Read The Docs](https://carlos-adir.github.io/NumericalMethods/).
 
-## Objetivo
 
-Implementar algoritmos de Calculo Numérico em Python e criar tutoriais de como utilizar os algoritmos implementados([veja o wiki](https://github.com/CarlosAdir/Metodos-Numericos/wiki)). Isso somente para fins didáticos.
+## How to use
 
-## Organização
+To use the code, you have to install these three libraries:
 
-A organização desse repositório segue uma ordem indicada pelo livro Análise Numérica de Richard L. Burden e J. Douglas Faires. Seguindo a mesma ordem dos capitulos:
+* [Numpy](https://numpy.org/)
+* [Sympy](https://www.sympy.org/)
+* [Matplotlib](https://matplotlib.org/)
 
-#### [Metodos Numéricos](https://github.com/CarlosAdir/Metodos-Numericos/wiki)
+The easiest way to have these libraries is install the [Anaconda](https://www.anaconda.com/) which install almost everything you need.
+Another way, is install the [Python](https://www.python.org/) and after that install each package/library using the command ```pip install wanttedpackage```
 
-1. [ ] Preliminares matemática e análises de erros
-2. [X] [Soluções de equações em uma variável](https://github.com/CarlosAdir/Metodos-Numericos/wiki/2:Solucoes-de-equacoes-uma-variavel)
-3. [X] [Interpolação e aproximação polinomial](https://github.com/CarlosAdir/Metodos-Numericos/wiki/3:Interpolacao-e-aproximacao-polinomial)
-4. [X] [Derivadas Numéricas e Integração](https://github.com/CarlosAdir/Metodos-Numericos/wiki/4:Derivadas-Numéricas-e-Integracao)
-5. [X] [Equações diferenciais ordinárias de valor inicial](https://github.com/CarlosAdir/Metodos-Numericos/wiki/5:Equacoes-diferenciais-ordinarias-de-valor-inicial)
-6. [ ] [Métodos diretos para resolver sistemas lineares](https://github.com/CarlosAdir/Metodos-Numericos/wiki/6:Metodos-diretos-para-resolver-sistemas-lineares)
-7. [ ] [Técnicas Iterativas na Algebra de Matrizes](https://github.com/CarlosAdir/Metodos-Numericos/wiki/7:Tecnicas-Iterativas-na-Algebra-de-Matrizes)
-8. [ ] Teoria da Aproximação
-9. [ ] Aproximando autovalores
-10. [ ] Soluções numéricas de sistema de equações não lineares
-11. [ ] Problemas de valores de contorno para EDOs
-12. [ ] Soluções numéricas para EDPs
+## Bibliography
 
-## Como contribuir
+There are many books that shows us the algorithms, but the guide book is the **Richard L. Burden**'s book: **Numerical Analysis**.
 
-Caso queira se tornar um colaborador ou tenha ideias, códigos, dicas de implementação, contate através do e-mail carlos.adir.leite@gmail.com para maiores informações.
+## Contribute
 
-## Autores
+There are many ways to contribute to our project:
+
+* Become a colaborator
+* Give ideas of the algorithms
+* Show problems using the [Issues](https://github.com/carlos-adir/NumericalMethods/issues)
+* Give implemented code using [Pull Requests](https://github.com/carlos-adir/NumericalMethods/pulls)
+
+
+To contact me directly, you can send me a email
+
+## Authors
 
 Autor | e-mail
 ------|-------
