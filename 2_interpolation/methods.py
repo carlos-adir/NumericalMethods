@@ -63,6 +63,15 @@ def Hermite(x, y, y_, X):
 
 
 def SplineLinear(x, y, X):
+    """
+    Spline Linear is a Spline of degree 1, which for each value of xi,
+    the position yi is known, and f(x) is a C-0 class function(continuous).
+    The conditions is that:
+        * f(x) = fi(x)   for x in [xi, xi+1]
+        * fi(x) = ? + ?*x
+        * f(x) is continuous (f is C-0 class function)
+        * f(xi) = yi
+    """
     n = len(x) - 1
     a = np.zeros(n + 1)
     b = np.zeros(n + 1)
@@ -92,6 +101,17 @@ def SplineLinear(x, y, X):
 
 
 def SplineQuad(x, y, X, y__=0):
+    """
+    Spline Quadratic is a Spline of degree 2, which for each value of xi,
+    the position yi is known, and f(x) is a C-1 class function.
+    The conditions is that:
+        * f(x) = fi(x)   for x in [xi, xi+1]
+        * fi(x) = ? + ?*x + ?*x^2
+        * f'(x) is continuous (f is C-1 class)
+        * f(xi) = yi
+    The boundary conditions are:
+        y0__ = f''(x0), the second derivate in the frist point
+    """
     n = len(x) - 1
     a = np.zeros(n + 1)
     b = np.zeros(n + 1)
@@ -125,6 +145,19 @@ def SplineQuad(x, y, X, y__=0):
 
 
 def SplineCubic(x, y, X, y0__=0, yn__=0):
+    """
+    Spline Cubic is a Spline of degree 3, which for each value of xi,
+    the position yi is known, and f(x) is a C-2 class function.
+    The conditions is that:
+        * f(x) = fi(x)   for x in [xi, xi+1]
+        * fi(x) = ? + ?*x + ?*x^2 + ?*x^3
+        * f''(x) is continuous (f is C-2 class function)
+        * f(xi) = yi
+    The boundary conditions are:
+        y0__ = f''(x0), the second derivate in the frist point
+        yn__ = f''(xn), the second derivate in the last point
+    if y0__ = yn__ = 0, we call that spline as "Natural spline"
+    """
     n = len(x) - 1
     h = x[1:] - x[:n]
     al = np.zeros(n + 1)  # alpha
@@ -160,7 +193,8 @@ def SplineCubic(x, y, X, y0__=0, yn__=0):
 
     for j in range(n - 1, -1, -1):
         c[j] = z[j] - mu[j] * c[j + 1]
-        b[j] = (a[j + 1] - a[j]) / h[j] - h[j] * (c[j + 1] + 2 * c[j]) / 3
+        b[j] = (a[j + 1] - a[j]) / h[j]
+        b[j] -= h[j] * (c[j + 1] + 2 * c[j]) / 3
         d[j] = (c[j + 1] - c[j]) / (3 * h[j])
 
     # return (x, a, b, c, d)
@@ -181,6 +215,17 @@ def SplineCubic(x, y, X, y0__=0, yn__=0):
 
 
 def SplineHermite(x, y, y_, X):
+    """
+    Hermite's Spline is a Spline of degree 4, which for each value of xi,
+    the position yi and the derivable yi_ is known, and f(x) is a C-2 class
+    function.
+    The conditions is that:
+        * f(x) = fi(x)   for x in [xi, xi+1]
+        * fi(x) = ? + ?*x + ?*x^2 + ?*x^3 + ?*x^4
+        * f''(x) is continuous (f is C-2 class)
+        * f(xi) = yi
+        * f'(xi) = yi_
+    """
     n = len(x) - 1
 
     a = np.zeros(n + 1)
@@ -195,13 +240,16 @@ def SplineHermite(x, y, y_, X):
 
     c[0] = 3 * (a[1] - a[0]) / h[0]**2 - (b[1] + 2 * b[0]) / h[0]
     for i in range(n):
-        c[i + 1] = -6 * (a[i + 1] - a[i]) / h[i]**2 + 3 * \
-            (b[i + 1] + b[i]) / h[i] + c[i]
+        c[i + 1] = c[i]
+        c[i + 1] += 3 * (b[i + 1] + b[i]) / h[i]
+        c[i + 1] -= 6 * (a[i + 1] - a[i]) / h[i]**2
     for i in range(n):
-        d[i] = 4 * (a[i + 1] - a[i]) / h[i]**3 - \
-            (b[i + 1] + 3 * b[i]) / h[i]**2 - 2 * c[i] / h[i]
-        e[i] = -3 * (a[i + 1] - a[i]) / h[i]**4 + \
-            (b[i + 1] + 2 * b[i]) / h[i]**3 + c[i] / h[i]**2
+        d[i] = 4 * (a[i + 1] - a[i]) / h[i]**3
+        d[i] -= (b[i + 1] + 3 * b[i]) / h[i]**2
+        d[i] -= 2 * c[i] / h[i]
+        e[i] = -3 * (a[i + 1] - a[i]) / h[i]**4
+        e[i] += (b[i + 1] + 2 * b[i]) / h[i]**3
+        e[i] += c[i] / h[i]**2
 
     # return (x, a, b, c, d, e)
 

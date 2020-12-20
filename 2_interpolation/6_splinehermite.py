@@ -4,14 +4,6 @@
            @date: 20th December 2020
          @author: Carlos Adir (carlos.adir.leite@gmail.com)
           @title: Hermite's Spline Algorithm
-    @description: Hermite's Spline is a Spline of degree 4, which for each
-                  value of xi, the position yi and the derivable yi_ is known.
-                  The conditions is that:
-                    * f(x) = fi(x)   for x in [xi, xi+1]
-                    * fi(x) = ? + ?*x + ?*x^2 + ?*x^3 + ?*x^4
-                    * f''(x) is continuous (f is C-2 class)
-                    * f(xi) = yi
-                    * f'(xi) = yi_
 """
 
 

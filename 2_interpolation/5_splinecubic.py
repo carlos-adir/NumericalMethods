@@ -89,7 +89,7 @@ def get_example(number):
 
 
 if __name__ == "__main__":
-    number = 1
+    number = 8
     (x, y), (X, Y), (x_plot, y_plot) = get_example(number)
     YL = SplineCubic(x, y, X)
     YL_plot = SplineCubic(x, y, x_plot)  # For plotting graph
