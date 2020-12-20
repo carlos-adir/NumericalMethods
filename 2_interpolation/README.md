@@ -1,55 +1,16 @@
-# Interpolação
+# Interpolation
 
-## Introdução
+## Introduction
 
-Existem diversos algoritmos para interpolação e aproximação polinomial. Aqui estão exemplificados alguns deles. Assumimos que você já conheça os métodos e que veja e apenas "aproveite" da implementação.
+For the introduction, you can see the [documentation](https://carlos-adir.github.io/NumericalMethods/2.html) that explains very well how to find the interpolation functions.
 
-Caso não entenda os algoritmos, procure um livro texto para explicar o algoritmo solicitado.
+## Files
 
-## 1 - Método de Lagrange
+All the methods for find the interpolation are in the file ```methods.py``` while the following files are examples showing how to use them. The links are the documentation for each method.
 
-Terminado
-
-## 2 - Método Neville
-
-Não terminado
-
-## 3 - Diferenças Divididas
-
-Não terminado
-
-## 4 - Diferenças Progressivas
-
-Não terminado
-
-## 5 - Diferenças Regressivas
-
-Não terminado
-
-## 6 - Diferenças Centradas
-
-Não terminado
-
-## 7 - Método de Hermite
-
-Não terminado
-
-## 8 - Diferenças Divididas de Hermite
-
-Não terminado
-
-## 9 - Spline Cúbica Natural
-
-Terminado
-
-## 10 - Spline Cúbica de condições de contorno
-
-## Para fazer
-
-* Verify if the algorithms:
-	* 5
-	* 6
-	* 7
-	* 9
-	* 10
-* Implement the graphics to help understanding
+* [Lagrange](https://carlos-adir.github.io/NumericalMethods/2_1.html): ```1_lagrange.py```
+* [Hermite](https://carlos-adir.github.io/NumericalMethods/2_2.html): ```2_hermite.py```
+* [Spline Linear](https://carlos-adir.github.io/NumericalMethods/2_3.html): ```3_splinelinear.py```
+* [Spline Quadratic](https://carlos-adir.github.io/NumericalMethods/2_3.html): ```4_splinequad.py```
+* [Spline Cubic](https://carlos-adir.github.io/NumericalMethods/2_3.html): ```5_splinecubic.py```
+* Hermite's Spline: ```6_splinehermite.py```
