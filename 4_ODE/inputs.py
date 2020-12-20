@@ -1,206 +1,127 @@
 # -*- coding: utf-8 -*-
 '''
-		   @file: input.py
-		   @date: 
-		 @author: Carlos Adir (carlos.adir.leite@gmail.com)
-	@description: 
+           @file: input.py
+           @date: 20th December
+         @author: Carlos Adir (carlos.adir.leite@gmail.com)
+          @title: Inputs for use in the ODE problems examples
 
 '''
 
-import sympy as sp
 import numpy as np
-from types_lib import Function
-
-limites = [	[1, 9],\
-			[1, 9],\
-			[1, 9]]
+from scipy.special import erf
 
 
-def get(algorithm, number):
-	limite = limites[algorithm-1]
-	if number < limite[0]:
-		number = limite[0]
-	if number > limite[1]:
-		number = limite[1]
-
-	if algorithm == 1:
-		return lambda : in1(number)
-	elif algorithm == 2:
-		return lambda : in2(number)
-	elif algorithm == 3:
-		return lambda : in3(number)
-	elif algorithm == 4:
-		return lambda : in4(number)
-	elif algorithm == 5:
-		return lambda : in5(number)
-	elif algorithm == 6:
-		return lambda : in6(number)
-	elif algorithm == 7:
-		return lambda : in7(number)
-	elif algorithm == 8:
-		return lambda : in8(number)
-	elif algorithm == 9:
-		return lambda : in9(number)
-	elif algorithm == 10:
-		return lambda : in10(number)
-
-def all(number):
-	t		= sp.symbols('t')
-	y 		= sp.symbols('y', cls = sp.Function)(t)
-	if number < 5:
-		if number == 1:
-			a, b, c	= 0, 2, 0.5									# The interval and initial value
-			n 		= 10 										# The number of segments
-			f 		= y - t**2 + 1								# The function f(t, y)
-		elif number == 2:
-			a, b, c = 0, 1, -2
-			n 		= 5
-			f 		= y * sp.tan(t) + t - 3
-		elif number == 3:
-			a, b, c	= 0, 2, 0.5									# The interval and initial value
-			n 		= 5 										# The number of segments
-			f 		= y - t										# The function f(t, y)
-		elif number == 4:
-			a, b, c = 1, 2, np.cos(2)*np.sin(10)
-			n 		= 10
-			f 		= 10*y*(sp.cos(10*t)/sp.sin(10*t)) - 2*y**2*sp.sin(2*t)/(sp.sin(10*t)*((sp.cos(2*t))**2))
-	else:
-		if number == 5:
-			a, b, c = 0, 1, 0
-			n 		= 20
-			f 		= t*sp.exp(3*t) - 2*y
-		elif number == 6:
-			a, b, c = 2, 3, 1
-			n 		= 20
-			f 		= 1 + (1-y)**2
-		elif number == 7:
-			a, b, c = 1, 2, 2
-			n 		= 40
-			f 		= 1+y/t
-		elif number == 8:
-			a, b, c = 1, 2, 2
-			n 		= 40
-			f 		= (1+t)/(1+y)
-		elif number == 9:										# A função do Peniel
-			a, b, c	= -5, 5, 0									# The interval and initial value
-			n 		= 20										# The number of segments
-			f 		= sp.exp(- t**2 + 1)						# The function f(t, y)
-			#y 		= (sp.E*sp.sqrt(sp.pi)/2*(sp.erf(t)-sp.erf(-5))	# É alguma coisa com o erf, a funcao exata
-	f = Function((t, y), f)
-	return a, b, c, n, f
-
-def exact(number):
-	t		= sp.symbols('t')
-	if number == 1:
-		y	= -0.5 * sp.exp(t)+t**2+2*t+1
-	elif number == 2:
-		y	= -3/(sp.cos(t))+t*sp.tan(t)- 3 *sp.tan(t) + 1
-	elif number == 3:
-		y	= -0.5*sp.exp(t)+t+1
-	elif number == 4:
-		y	= sp.cos(2*t)*sp.sin(10*t)
-	y 		= Function(t, y)
-	return y
+def f1(t, y):
+    return y - t**2 + 1
 
 
-def in1(number):
-	a, b, c, n, f = all(number)
-	if number < 5:
-		y	= exact(number)
-	else:
-		y	= None
-	return a, b, c, n, f, y
-
-def in2(number):
-
-	# Mudando o valor de ordem se obtém diferentes ordens para o método de Taylor
-
-	# The variables
-	a, b, c, n, f = all(number)
-	
-
-	if number < 5:
-		y	= exact(number)
-	else:
-		y	= None	
-	return a, b, c, n, f, y
+def y1(t):
+    return -0.5 * np.exp(t) + t**2 + 2 * t + 1
 
 
-def in3(number):
-	return in1(number)
-	
-def in4(number):
-	return in1(number)
-'''
-def in3(number):
-	#This function is the Second Taylor
-	
-	# The variables
-	t		= sp.symbols('t')
-	y 		= sp.symbols('y')
-
-	# Initial conditions
-	a, b, c	= 0, 2, 0.5									# The interval and initial value
-	n 		= 10										# The number of segments
-	f 		= y - t**2 + 1								# The function f(t, y)
-	dfdy	= sp.Add(1)
-	dfdt	= sp.Add(-2*t)
-	
-	h = (b-a)/n
-	# The begin to start the calculations
-	f_		= dfdy*f + dfdt								# The frist derivative
-	T2 		= f+(h/2)*f_
-	T2 		= sp.lambdify((t, y), T2, "numpy") 			# Transform the function to lambdify
-	
-	return a, b, c, n, T2
-'''
-
-def in4(number):
-	'''
-	#This function is the Thirth Taylor
-	'''
-
-	# The variables
-	t		= sp.symbols('t')
-	y 		= sp.symbols('y')
-
-	# Initial conditions
-	a, b, c	= 0, 2, 0.5									# The interval and initial value
-	n 		= 10										# The number of segments
-	f 		= y - t**2 + 1								# The function f(t, y)
-	dfdy	= sp.Add(1)
-	d2fdy2	= sp.Add(0)
-	dfdt	= sp.Add(-2*t)
-	d2fdt2	= sp.Add(-2)
-
-	h = (b-a)/n
-	# The begin to start the calculations
-	f_		= dfdy*f + dfdt								# The frist derivative
-	f__		= d2fdy2*f + dfdy*f_ + d2fdt2				# The second derivative
-	T3 		= f+(h/2)*f_+(h**2/6)*f__
-	T3 		= sp.lambdify((t, y), T3, "numpy") 			# Transform the function to lambdify
-	
-	return a, b, c, n, T3
+def f2(t, y):
+    return y * np.tan(t) + t - 3
 
 
-'''
+def y2(t):
+    return -3 / np.cos(t) + t * np.tan(t) - 3 * np.tan(t) + 1
 
-These functions are to:
-* 4-Runge_Kutta_Fehlberg 
 
-'''
+def f3(t, y):
+    return y - t
 
-def in5(number):
-	# The variables
-	t		= sp.symbols('t')
-	y 		= sp.symbols('y')
 
-	# Initial conditions
-	a, b, c	= 0, 2, 0.5									# The interval and initial value
-	hmax	= 0.2 										# The max step size that we want
-	hmin 	= 0.002										# The minimal value of step size
-	f 		= y - t**2 + 1								# The function f(t, y)
-	TOL		= 1e-4
-	# The begin to start the calculations
-	f 		= sp.lambdify((t, y), f, "numpy") 			# Transform the function to lambdify
-	return a, b, c, hmax, hmin, f, TOL	
+def y3(t):
+    return -0.5 * np.exp(t) + t + 1
+
+
+def f4(t, y):
+    return 2 * y / t + t**2 * np.exp(t)
+
+
+def y4(t):
+    return t**2 * (np.exp(t) - np.exp(1))
+
+
+def f5(t, y):
+    return t * np.exp(3 * t) - 2 * y
+
+
+def f6(t, y):
+    return 1 + (1 - y)**2
+
+
+def f7(t, y):
+    return 1 + y / t
+
+
+def f8(t, y):
+    return (1 + t) / (1 + y)
+
+
+def f9(t, y):
+    return np.exp(- t**2) / np.sqrt(np.pi)
+
+
+def y9(t):
+    # y =
+    # The exact solution is something like that
+    return (erf(t) + 1) / 2
+
+
+def get_example(number):
+    if number == 1:
+        a, b, c = 0, 2, 0.5  # The interval and initial value
+        n = 10  # The number of segments
+        f = f1  # The function f(t, y)
+    elif number == 2:
+        a, b, c = 0, 1, -2
+        n = 5
+        f = f2
+    elif number == 3:
+        a, b, c = 0, 2, 0.5
+        n = 5
+        f = f3
+    elif number == 4:
+        a, b, c = 1, 2, 0
+        n = 10
+        f = f4
+    elif number == 5:
+        a, b, c = 0, 1, 0
+        n = 20
+        f = f5
+    elif number == 6:
+        a, b, c = 2, 3, 1
+        n = 20
+        f = f6
+    elif number == 7:
+        a, b, c = 1, 2, 2
+        n = 40
+        f = f7
+    elif number == 8:
+        a, b, c = 1, 2, 2
+        n = 20
+        f = f8
+    elif number == 9:
+        a, b, c = -5, 5, 0
+        n = 10
+        f = f9
+    else:
+        raise Exception("Exemple number not found: Number = " + str(number))
+    return a, b, c, n, f
+
+
+def exact_solution(number):
+    if number == 1:
+        y = y1
+    elif number == 2:
+        y = y2
+    elif number == 3:
+        y = y3
+    elif number == 4:
+        y = y4
+    elif number == 9:
+        y = y9
+    else:
+        y = None
+    return y
